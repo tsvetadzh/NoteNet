@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Header</title>
+        <style>
+            .header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-left: 1em;
+                padding-right: 1em;
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                z-index: 1;
+                height: 5em;
+                background-color: rgb(169, 226, 169);
+            }
+
+            .left-side{
+                display: inline-flex;
+            }
+
+            .right-side{
+                display: flex;
+                align-items: center;
+                position: relative;
+            }
+
+            #logo img{
+                height: 4em;
+                width: auto;
+                margin-top: 0.5em;
+                margin-right: 0.5em;
+            }
+
+            #tittle{
+                color:black;
+                text-decoration: none;
+                font-family:'Times New Roman', Times, serif;
+                font-size: 1.5em;
+            }
+
+            #tittle:hover{
+                color: rgb(63, 63, 63);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="header">
+            <div class="left-side">
+                <a id="logo" href="templates/homepage.html"><img src="assets/logo.png"></a>
+                <a id="tittle" href="templates/homepage.html"><p>NoteNet</p></a>
+            </div>
+            <div class="right-side">
+               
+            </div>
+        </div>
+    </body>
+</html>
