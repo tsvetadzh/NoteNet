@@ -39,7 +39,6 @@ def eight_ai(request):
 def eight_networks(request):
     return render(request, 'subjects/eight_networks.html')
 
-# Subject pages - Grade 9
 def nine_system(request):
     return render(request, 'subjects/nine_system.html')
 

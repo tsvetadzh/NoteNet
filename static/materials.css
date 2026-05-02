@@ -14,3 +14,52 @@ body {
     padding-top: 5em;
     overflow-y: auto;
 }
+
+.main-part{
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    justify-content: center;
+    flex-direction: row;
+    padding-top: 7em;
+}
+
+.eight{
+    background-color: rgb(169, 226, 169);
+    padding-right: 8em;
+    padding-left: 8em;
+    padding-bottom: 13em;
+    padding-top: 13em;
+}
+
+.nine{
+    background-color: rgb(169, 226, 169);
+    padding-right: 8em;
+    padding-left: 8em;
+    padding-bottom: 13em;
+    padding-top: 13em;
+}
+
+.ten{
+    background-color: rgb(169, 226, 169);
+    padding-right: 8em;
+    padding-left: 8em;
+    padding-bottom: 13em;
+    padding-top: 13em;
+}
+
+.eleven{
+    background-color: rgb(169, 226, 169);
+    padding-right: 8em;
+    padding-left: 8em;
+    padding-bottom: 13em;
+    padding-top: 13em;
+}
+
+.twelve{
+    background-color: rgb(169, 226, 169);
+    padding-right: 8em;
+    padding-left: 8em;
+    padding-bottom: 13em;
+    padding-top: 13em;
+}
