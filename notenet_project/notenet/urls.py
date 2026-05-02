@@ -29,4 +29,23 @@ urlpatterns = [
 
     path('class/12/system/', views.twelve_system, name='twelve_system'),
     path('class/12/networks/', views.twelve_networks, name='twelve_networks'),
+
+    path('class/9/networkssubj/', views.nine_networkssubj, name='nine_networkssubj'),
+    path('class/9/electrotechnics/', views.nine_electrotechnics, name='nine_electrotechnics'),
+    path('class/9/literature/', views.nine_literature, name='nine_literature'),
+    path('class/9/chemistry/', views.nine_chemistry, name='nine_chemistry'),
+    path('class/9/geography/', views.nine_geography, name='nine_geography'),
+    path('class/9/scripts/', views.nine_scripts, name='nine_scripts'),
+    path('class/9/history/', views.nine_history, name='nine_history'),
+    path('class/9/programming/', views.nine_programming, name='nine_programming'),
+    path('class/9/zbut/', views.nine_zbut, name='nine_zbut'),
+    path('class/9/gradivni/', views.nine_gradivni, name='nine_gradivni'),
+    path('class/9/physycs/', views.nine_physycs, name='nine_physycs'),
+    path('class/9/phylosophy/', views.nine_phylosophy, name='nine_phylosophy'),
+    path('class/9/russian/', views.nine_russian, name='nine_russian'),
+    path('class/9/maths/', views.nine_maths, name='nine_maths'),
+    path('class/9/english/', views.nine_english, name='nine_english'),
+    path('class/9/biology/', views.nine_biology, name='nine_biology'),
+    path('class/9/it/', views.nine_it, name='nine_it'),
+    path('class/9/enterprenuering/', views.nine_enterprenuering, name='nine_enterprenuering'),
 ]

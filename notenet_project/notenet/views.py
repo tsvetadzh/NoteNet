@@ -62,3 +62,57 @@ def twelve_system(request):
 
 def twelve_networks(request):
     return render(request, 'subjects/twelve_networks.html')
+
+def nine_networkssubj(request):
+    return render(request, 'disciplines/9/networks.html')
+
+def nine_electrotechnics(request):
+    return render(request, 'disciplines/9/electrotechnics.html')
+
+def nine_literature(request):
+    return render(request, 'disciplines/9/literature.html')
+
+def nine_chemistry(request):
+    return render(request, 'disciplines/9/chemistry.html')
+
+def nine_geography(request):
+    return render(request, 'disciplines/9/geography.html')
+
+def nine_scripts(request):
+    return render(request, 'disciplines/9/scripts.html')
+
+def nine_history(request):
+    return render(request, 'disciplines/9/history.html')
+
+def nine_programming(request):
+    return render(request, 'disciplines/9/programming.html')
+
+def nine_zbut(request):
+    return render(request, 'disciplines/9/zbut.html')
+
+def nine_gradivni(request):
+    return render(request, 'disciplines/9/gradivni.html')
+
+def nine_physycs(request):
+    return render(request, 'disciplines/9/physycs.html')
+
+def nine_phylosophy(request):
+    return render(request, 'disciplines/9/phylosophy.html')
+
+def nine_russian(request):
+    return render(request, 'disciplines/9/russian.html')
+
+def nine_maths(request):
+    return render(request, 'disciplines/9/maths.html')
+
+def nine_english(request):
+    return render(request, 'disciplines/9/english.html')
+
+def nine_biology(request):
+    return render(request, 'disciplines/9/biology.html')
+
+def nine_it(request):
+    return render(request, 'disciplines/9/it.html')
+
+def nine_enterprenuering(request):
+    return render(request, 'disciplines/9/enterprenuering.html')
