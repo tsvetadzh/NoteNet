@@ -43,6 +43,24 @@
                 color: rgb(63, 63, 63);
             }
 
+            .searchbox{
+                border: none;
+                outline: none;
+                transition: 0.3s;
+                padding-left: 8em;
+                padding-right: 8em;
+                margin-right: 3em;
+                padding-top: 0.5em;
+                padding-bottom: 0.5em;
+                background-color: rgb(210, 245, 208);
+            }
+
+            .searchbox:hover{
+                background-color: rgb(224, 236, 223);
+                border: none;
+                outline: none;
+            }
+
             #menu-toggle {
                 display: none;
             }
