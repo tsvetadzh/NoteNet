@@ -1,15 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
-        <title>My profile</title>
-        <link rel="stylesheet" href="header.css">
-        <link rel="stylesheet" href="homepage.css">
+        <title>Add notes</title>
+        <link rel="stylesheet" href="{% static 'header.css' %}">
+        <link rel="stylesheet" href="{% static 'myclass.css' %}">
     </head>
 
     <body>
         <div class="header">
             <div class="left-side">
-                <div id="logo"><img src="assets/logo.png"></div>
+                <div id="logo"><img src="{% static 'assets/logo.png' %}"></div>
                 <div id="tittle"><p>NoteNet</p></div>
             </div>
             <div class="right-side">
@@ -20,11 +21,11 @@
                     <span></span>
                </label>
                <div class="popup-menu">
-                   <a href="homepage.html">Homepage</a>
-                   <a href="materials.html">Materials</a>
-                   <a href="addnote.html">Add notes</a>
-                   <a href="myclass.html">My class</a>
-                   <a href="profile.html">My profile</a>
+                   <a href="{% url 'homepage' %}">Homepage</a>
+                   <a href="{% url 'materials' %}">Materials</a>
+                   <a href="{% url 'addnote' %}">Add notes</a>
+                   <a href="{% url 'myclass' %}">My class</a>
+                   <a href="{% url 'profile' %}">My profile</a>
                </div>
             </div>
         </div>
