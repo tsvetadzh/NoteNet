@@ -30,14 +30,8 @@ def class_eleven(request):
 def class_twelve(request):
     return render(request, 'classes/twelve.html')
 
-def eight_system(request):
-    return render(request, 'subjects/eight_system.html')
-
-def eight_ai(request):
-    return render(request, 'subjects/eight_ai.html')
-
-def eight_networks(request):
-    return render(request, 'subjects/eight_networks.html')
+def eight(request):
+    return render(request, 'subjects/eight.html')
 
 def nine_system(request):
     return render(request, 'subjects/nine_system.html')

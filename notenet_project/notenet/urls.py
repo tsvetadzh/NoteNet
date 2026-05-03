@@ -14,9 +14,7 @@ urlpatterns = [
     path('class/11/', views.class_eleven, name='class_eleven'),
     path('class/12/', views.class_twelve, name='class_twelve'),
 
-    path('class/8/system/', views.eight_system, name='eight_system'),
-    path('class/8/ai/', views.eight_ai, name='eight_ai'),
-    path('class/8/networks/', views.eight_networks, name='eight_networks'),
+    path('class/8/system/', views.eight, name='eight'),
 
     path('class/9/system/', views.nine_system, name='nine_system'),
     path('class/9/networks/', views.nine_networks, name='nine_networks'),

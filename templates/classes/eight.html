@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>8th grade</title>
+        <link rel="stylesheet" href="{% static 'header.css' %}">
+        <link rel="stylesheet" href="{% static 'classes.css' %}">
+    </head>
+
+    <body>
+        <div class="header">
+            <div class="left-side">
+                <div id="logo"><img src="{% static 'assets/logo.png' %}"></div>
+                <div id="tittle"><p>NoteNet</p></div>
+            </div>
+            <div class="right-side">
+               <input type="checkbox" id="menu-toggle">
+               <label class="hamburger-label" for="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+               </label>
+               <div class="popup-menu">
+                   <a href="{% url 'homepage' %}">Homepage</a>
+                   <a href="{% url 'materials' %}">Materials</a>
+                   <a href="{% url 'addnote' %}">Add notes</a>
+                   <a href="{% url 'myclass' %}">My class</a>
+                   <a href="{% url 'profile' %}">My profile</a>
+               </div>
+            </div>
+        </div>
+
+        <div class="main-part">
+            <div class="a">
+                <a class="a-text" href="{% url 'eight'%}">A</a>
+            </div>
+
+            <div class="b">
+                <a class="b-text" href="{% url 'eight'%}">B</a>
+            </div>
+
+            <div class="c">
+                <a class="c-text" href="{% url 'eight'%}">C</a>
+            </div>
+
+            <div class="d">
+                <a class="d-text" href="{% url 'eight'%}">D</a>
+            </div>
+        </div>
+    </body>
+</html>
