@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Materials</title>
+        <link rel="stylesheet" href="{% static 'header.css' %}">
+        <link rel="stylesheet" href="{% static 'subjects.css' %}">
+    </head>
+
+    <body>
+        <div class="header">
+            <div class="left-side">
+                <div id="logo"><img src="{% static 'assets/logo.png' %}"></div>
+                <div id="tittle"><p>NoteNet</p></div>
+            </div>
+            <div class="right-side">
+               <input type="checkbox" id="menu-toggle">
+               <label class="hamburger-label" for="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+               </label>
+               <div class="popup-menu">
+                   <a href="{% url 'homepage' %}">Homepage</a>
+                   <a href="{% url 'materials' %}">Materials</a>
+                   <a href="{% url 'addnote' %}">Add notes</a>
+                   <a href="{% url 'myclass' %}">My class</a>
+                   <a href="{% url 'profile' %}">My profile</a>
+               </div>
+            </div>
+        </div>
+
+
+         <div class="first-row">
+            <div class="intro_program-box">
+                <a class="intro_program-text" href="{% url 'eight_intro_program'%}">Intro into <br> Programming</a>
+            </div>
+
+            <div class="it-box">
+                <a class="it-text" href="{% url 'eight_it'%}">IT</a>
+            </div>
+
+            <div class="intro_special-box">
+                <a class="intro_special-text" href="{% url 'eight_intro_special'%}">Intro to <br> Specialty</a>
+            </div>
+
+            <div class="english-box">
+                <a class="english-text" href="{% url 'eight_english'%}">English</a>
+            </div>
+        </div>
+
+
+         <div class="second-row">
+            <div class="physycs-box">
+                <a class="physycs-text" href="{% url 'eight_physycs'%}">Physycs</a>
+            </div>
+
+            <div class="geography-box">
+                <a class="geography-text" href="{% url 'eight_geography'%}">Geography</a>
+            </div>
+
+            <div class="biology-box">
+                <a class="biology-text" href="{% url 'eight_biology'%}">Biology</a>
+            </div>
+
+            <div class="chem-box">
+                <a class="chem-text" href="{% url 'eight_chem'%}">Chemistry</a>
+            </div>
+        </div>
+
+
+         <div class="third-row">
+            <div class="phylosophy-box">
+                <a class="phylosophy-text" href="{% url 'eight_phylosophy'%}">Phylosophy</a>
+            </div>
+
+            <div class="history-box">
+                <a class="history-text" href="{% url 'eight_history'%}">History</a>
+            </div>
+
+            <div class="literature-box">
+                <a class="literature-text" href="{% url 'eight_literature'%}">Literature</a>
+            </div>
+
+        </div>
+
+        </div>
+    </body>
+</html>

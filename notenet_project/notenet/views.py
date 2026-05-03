@@ -110,3 +110,36 @@ def nine_it(request):
 
 def nine_enterprenuering(request):
     return render(request, 'disciplines/9/enterprenuering.html')
+
+def eight_biology(request):
+    return render(request, 'disciplines/8/biology.html')
+
+def eight_physycs(request):
+    return render(request, 'disciplines/8/physycs.html')
+
+def eight_intro_program(request):
+    return render(request, 'disciplines/8/intro_program.html')
+
+def eight_literature(request):
+    return render(request, 'disciplines/8/literature.html')
+
+def eight_english(request):
+    return render(request, 'disciplines/8/english.html')
+
+def eight_history(request):
+    return render(request, 'disciplines/8/history.html')
+
+def eight_intro_special(request):
+    return render(request, 'disciplines/8/intro_special.html')
+
+def eight_it(request):
+    return render(request, 'disciplines/8/it.html')
+
+def eight_geography(request):
+    return render(request, 'disciplines/8/geography.html')
+
+def eight_chem(request):
+    return render(request, 'disciplines/8/chem.html')
+
+def eight_phylosophy(request):
+    return render(request, 'disciplines/8/phylosophy.html')

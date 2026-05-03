@@ -46,4 +46,16 @@ urlpatterns = [
     path('class/9/biology/', views.nine_biology, name='nine_biology'),
     path('class/9/it/', views.nine_it, name='nine_it'),
     path('class/9/enterprenuering/', views.nine_enterprenuering, name='nine_enterprenuering'),
+
+    path('class/8/biology/', views.eight_biology, name='eight_biology'),
+    path('class/8/physycs/', views.eight_physycs, name='eight_physycs'),
+    path('class/8/intro_program/', views.eight_intro_program, name='eight_intro_program'),
+    path('class/8/literature/', views.eight_literature, name='eight_literature'),
+    path('class/8/english/', views.eight_english, name='eight_english'),
+    path('class/8/history/', views.eight_history, name='eight_history'),
+    path('class/8/intro_special/', views.eight_intro_special, name='eight_intro_special'),
+    path('class/8/it/', views.eight_it, name='eight_it'),
+    path('class/8/geography/', views.eight_geography, name='eight_geography'),
+    path('class/8/chem/', views.eight_chem, name='eight_chem'),
+    path('class/8/phylosophy/', views.eight_phylosophy, name='eight_phylosophy'),
 ]
