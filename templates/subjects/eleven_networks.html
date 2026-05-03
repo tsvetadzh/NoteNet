@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Materials</title>
+        <link rel="stylesheet" href="{% static 'header.css' %}">
+        <link rel="stylesheet" href="{% static 'subjects_eleven.css' %}">
+    </head>
+
+    <body>
+        <div class="header">
+            <div class="left-side">
+                <div id="logo"><img src="{% static 'assets/logo.png' %}"></div>
+                <div id="tittle"><p>NoteNet</p></div>
+            </div>
+            <div class="right-side">
+               <input type="checkbox" id="menu-toggle">
+               <label class="hamburger-label" for="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+               </label>
+               <div class="popup-menu">
+                   <a href="{% url 'homepage' %}">Homepage</a>
+                   <a href="{% url 'materials' %}">Materials</a>
+                   <a href="{% url 'addnote' %}">Add notes</a>
+                   <a href="{% url 'myclass' %}">My class</a>
+                   <a href="{% url 'profile' %}">My profile</a>
+               </div>
+            </div>
+        </div>
+
+
+        <div class="first-row">
+            <div class="ape-box">
+                <a class="ape-text" href="{% url 'eleven_ape'%}">APE</a>
+            </div>
+
+            <div class="usss-box">
+                <a class="usss-text" href="{% url 'eleven_usss'%}">USSS</a>
+            </div>
+
+            <div class="bomt-box">
+                <a class="bomt-text" href="{% url 'eleven_bomt'%}">BOMT</a>
+            </div>
+
+            <div class="networks-box">
+                <a class="networks-text" href="{% url 'eleven_networkssubj'%}">Networks</a>
+            </div>
+        </div>
+
+
+        <div class="second-row">
+            <div class="mpt-box">
+                <a class="mpt-text" href="{% url 'eleven_mpt'%}">Math programming</a>
+            </div>
+
+            <div class="vmks-box">
+                <a class="vmks-text" href="{% url 'eleven_vmks'%}">VMKS</a>
+            </div>
+
+            <div class="ktt-box">
+                <a class="ktt-text" href="{% url 'eleven_ktt'%}">KTT</a>
+            </div>
+
+            <div class="go-box">
+                <a class="go-text" href="{% url 'eleven_go'%}">GO</a>
+            </div>
+        </div>
+
+
+        <div class="third-row">
+            <div class="maths-box">
+                <a class="maths-text" href="{% url 'eleven_maths'%}">Maths</a>
+            </div>
+
+            <div class="russian-box">
+                <a class="russian-text" href="{% url 'eleven_russian'%}">Russian</a>
+            </div>
+
+            <div class="literature-box">
+                <a class="literature-text" href="{% url 'eleven_literature'%}">Literature</a>
+            </div>
+
+            <div class="english-box">
+                <a class="english-text" href="{% url 'eleven_english'%}">English</a>
+            </div>
+        </div>
+
+        <div class="forth-row">
+            <div class="os-box">
+                <a class="os-text" href="{% url 'eleven_os'%}">OS</a>
+            </div>
+        </div>
+
+    </body>
+</html>

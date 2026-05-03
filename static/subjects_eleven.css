@@ -16,7 +16,8 @@ body {
 }
 
 .first-row,
-.second-row
+.second-row,
+.third-row
 {
     display: flex;
     align-items: center;
@@ -28,7 +29,7 @@ body {
     margin-right: 1em;
 }
 
-.third-row{
+.forth-row{
     display: flex;
     align-items: center;
     gap: 3em;
@@ -51,7 +52,13 @@ body {
 .literature-box,
 .maths-box,
 .english-box,
-.russian-box
+.russian-box,
+.ape-box,
+.usss-box,
+.bomt-box,
+.networks-box,
+.mpt-box,
+.ktt-box
 {
     background-color: rgb(200, 226, 169);
     padding-bottom: 6em;
@@ -72,7 +79,13 @@ body {
 .literature-text,
 .maths-text,
 .english-text,
-.russian-text
+.russian-text,
+.ape-text,
+.usss-text,
+.bomt-text,
+.networks-text,
+.mpt-text,
+.ktt-text
 {
     display: flex;
     flex-direction: row;
