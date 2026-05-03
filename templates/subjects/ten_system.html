@@ -4,7 +4,7 @@
     <head>
         <title>Materials</title>
         <link rel="stylesheet" href="{% static 'header.css' %}">
-        <link rel="stylesheet" href="{% static 'subjects_eight.css' %}">
+        <link rel="stylesheet" href="{% static 'subjects_ten.css' %}">
     </head>
 
     <body>
@@ -31,17 +31,17 @@
         </div>
 
 
-         <div class="first-row">
+        <div class="first-row">
             <div class="oop-box">
-                <a class="oop-text" href="{% url 'ten_oop'%}">Intro to OOP<br>Programming</a>
+                <a class="oop-text" href="{% url 'ten_oop'%}">Intro to OOP</a>
             </div>
 
-            <div class="asd-row">
+            <div class="asd-box">
                 <a class="asd-text" href="{% url 'ten_asd'%}">Intro to ASD</a>
             </div>
 
             <div class="vmks-box">
-                <a class="vmks-text" href="{% url 'ten_vmks'%}">Intro to VMKS<br>Specialty</a>
+                <a class="vmks-text" href="{% url 'ten_vmks'%}">Intro to VMKS</a>
             </div>
 
             <div class="dig-box">
@@ -50,7 +50,7 @@
         </div>
 
 
-         <div class="second-row">
+        <div class="second-row">
             <div class="analog-box">
                 <a class="analog-text" href="{% url 'ten_analogy_sch'%}">Analogy schemotech</a>
             </div>
@@ -101,10 +101,15 @@
             </div>
 
             <div class="english-box">
-                <a class="english-text" href="{% url 'ten_english'%}">Iconomics</a>
+                <a class="english-text" href="{% url 'ten_english'%}">English</a>
             </div>
         </div>
 
+        <div class="fifth-row">
+            <diV class="maths-box">
+                <a class="maths-text" href="{% url 'ten_maths' %}">Maths<a>
+            </div>
         </div>
+
     </body>
 </html>
