@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Materials</title>
+        <link rel="stylesheet" href="{% static 'header.css' %}">
+        <link rel="stylesheet" href="{% static 'subjects_eight.css' %}">
+    </head>
+
+    <body>
+        <div class="header">
+            <div class="left-side">
+                <div id="logo"><img src="{% static 'assets/logo.png' %}"></div>
+                <div id="tittle"><p>NoteNet</p></div>
+            </div>
+            <div class="right-side">
+               <input type="checkbox" id="menu-toggle">
+               <label class="hamburger-label" for="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+               </label>
+               <div class="popup-menu">
+                   <a href="{% url 'homepage' %}">Homepage</a>
+                   <a href="{% url 'materials' %}">Materials</a>
+                   <a href="{% url 'addnote' %}">Add notes</a>
+                   <a href="{% url 'myclass' %}">My class</a>
+                   <a href="{% url 'profile' %}">My profile</a>
+               </div>
+            </div>
+        </div>
+
+
+         <div class="first-row">
+            <div class="oop-box">
+                <a class="oop-text" href="{% url 'ten_oop'%}">Intro to OOP<br>Programming</a>
+            </div>
+
+            <div class="asd-row">
+                <a class="asd-text" href="{% url 'ten_asd'%}">Intro to ASD</a>
+            </div>
+
+            <div class="vmks-box">
+                <a class="vmks-text" href="{% url 'ten_vmks'%}">Intro to VMKS<br>Specialty</a>
+            </div>
+
+            <div class="dig-box">
+                <a class="dig-text" href="{% url 'ten_digital_sch'%}">Digital schemotech</a>
+            </div>
+        </div>
+
+
+         <div class="second-row">
+            <div class="analog-box">
+                <a class="analog-text" href="{% url 'ten_analogy_sch'%}">Analogy schemotech</a>
+            </div>
+
+            <div class="gradivni-box">
+                <a class="gradivni-text" href="{% url 'ten_gradivni'%}">Gradivni</a>
+            </div>
+
+            <div class="physycs-box">
+                <a class="physycs-text" href="{% url 'ten_physycs'%}">Physycs</a>
+            </div>
+
+            <div class="chem-box">
+                <a class="chem-text" href="{% url 'ten_chem'%}">Chemistry</a>
+            </div>
+        </div>
+
+
+        <div class="third-row">
+            <div class="phylosophy-box">
+                <a class="phylosophy-text" href="{% url 'ten_phylosophy'%}">Phylosophy</a>
+            </div>
+
+            <div class="history-box">
+                <a class="history-text" href="{% url 'ten_history'%}">History</a>
+            </div>
+
+            <div class="literature-box">
+                <a class="literature-text" href="{% url 'ten_literature'%}">Literature</a>
+            </div>
+
+            <div class="iconomics-box">
+                <a class="iconomics-text" href="{% url 'ten_iconomics'%}">Iconomics</a>
+            </div>
+        </div>
+
+        <div class="forth-row">
+            <div class="geography-box">
+                <a class="geography-text" href="{% url 'ten_geography'%}">Geography</a>
+            </div>
+
+            <div class="biology-box">
+                <a class="biology-text" href="{% url 'ten_biology'%}">Biology</a>
+            </div>
+
+            <div class="russian-box">
+                <a class="russian-text" href="{% url 'ten_russian'%}">Russian</a>
+            </div>
+
+            <div class="english-box">
+                <a class="english-text" href="{% url 'ten_english'%}">Iconomics</a>
+            </div>
+        </div>
+
+        </div>
+    </body>
+</html>

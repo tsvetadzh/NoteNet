@@ -15,6 +15,8 @@ def myclass(request):
 def profile(request):
     return render(request, 'profile.html')
 
+
+
 def class_eight(request):
     return render(request, 'classes/eight.html')
 
@@ -29,6 +31,8 @@ def class_eleven(request):
 
 def class_twelve(request):
     return render(request, 'classes/twelve.html')
+
+
 
 def eight(request):
     return render(request, 'subjects/eight.html')
@@ -56,6 +60,8 @@ def twelve_system(request):
 
 def twelve_networks(request):
     return render(request, 'subjects/twelve_networks.html')
+
+
 
 def nine_networkssubj(request):
     return render(request, 'disciplines/9/networks.html')
@@ -111,6 +117,8 @@ def nine_it(request):
 def nine_enterprenuering(request):
     return render(request, 'disciplines/9/enterprenuering.html')
 
+
+
 def eight_biology(request):
     return render(request, 'disciplines/8/biology.html')
 
@@ -143,3 +151,62 @@ def eight_chem(request):
 
 def eight_phylosophy(request):
     return render(request, 'disciplines/8/phylosophy.html')
+
+
+
+def ten_physycs(request):
+    return render(request, 'disciplines/10/physycs.html')
+
+def ten_history(request):
+    return render(request, 'disciplines/10/history.html')
+
+def ten_russian(request):
+    return render(request, 'disciplines/10/russian.html')
+
+def ten_iconomics(request):
+    return render(request, 'disciplines/10/iconomics.html')
+
+def ten_literature(request):
+    return render(request, 'disciplines/10/literature.html')
+
+def ten_oop(request):
+    return render(request, 'disciplines/10/oop.html')
+
+def ten_biology(request):
+    return render(request, 'disciplines/10/biology.html')
+
+def ten_maths(request):
+    return render(request, 'disciplines/10/maths.html')
+
+def ten_asd(request):
+    return render(request, 'disciplines/10/asd.html')
+
+def ten_vmks(request):
+    return render(request, 'disciplines/10/vmks.html')
+
+def ten_gradivni(request):
+    return render(request, 'disciplines/10/gradivni.html')
+
+def ten_chem(request):
+    return render(request, 'disciplines/10/chem.html')
+
+def ten_english(request):
+    return render(request, 'disciplines/10/english.html')
+
+def ten_geography(request):
+    return render(request, 'disciplines/10/geography.html')
+
+def ten_digital_sch(request):
+    return render(request, 'disciplines/10/digital_sch.html')
+
+def ten_analogy_sch(request):
+    return render(request, 'disciplines/10/analogy_sch.html')
+
+def ten_phylosophy(request):
+    return render(request, 'disciplines/10/phylosophy.html')
+
+def ten_comp_arch_per_dev(request):
+    return render(request, 'disciplines/10/comp_arch_per_dev.html')
+
+def ten_intro_cmr(request):
+    return render(request, 'disciplines/10/intro_cmr.html')
