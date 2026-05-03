@@ -210,3 +210,59 @@ def ten_comp_arch_per_dev(request):
 
 def ten_intro_cmr(request):
     return render(request, 'disciplines/10/intro_cmr.html')
+
+
+
+def eleven_os(request):
+    return render(request, 'disciplines/11/os.html')
+
+def eleven_maths(request):
+    return render(request, 'disciplines/11/maths.html')
+
+def eleven_database(request):
+    return render(request, 'disciplines/11/database.html')
+
+def eleven_english(request):
+    return render(request, 'disciplines/11/english.html')
+
+def eleven_math_progr(request):
+    return render(request, 'disciplines/11/math_progr.html')
+
+def eleven_object_progr(request):
+    return render(request, 'disciplines/11/object_progr.html')
+
+def eleven_literature(request):
+    return render(request, 'disciplines/11/literature.html')
+
+def eleven_software(request):
+    return render(request, 'disciplines/11/software.html')
+
+def eleven_russian(request):
+    return render(request, 'disciplines/11/russian.html')
+
+def eleven_vmks(request):
+    return render(request, 'disciplines/11/vmks.html')
+
+def eleven_go(request):
+    return render(request, 'disciplines/11/go.html')
+
+def eleven_vot(request):
+    return render(request, 'disciplines/11/vot.html')
+
+def eleven_ape(request):
+    return render(request, 'disciplines/11/ape.html')
+
+def eleven_ktt(request):
+    return render(request, 'disciplines/11/ktt.html')
+
+def eleven_usss(request):
+    return render(request, 'disciplines/11/usss.html')
+
+def eleven_bomt(request):
+    return render(request, 'disciplines/11/bomt.html')
+
+def eleven_mpt(request):
+    return render(request, 'disciplines/11/mpt.html')
+
+def eleven_networkssubj(request):
+    return render(request, 'disciplines/11/networks.html')

@@ -40,18 +40,18 @@ body {
     margin-right: 1em;
 }
 
-.intro_program-box,
-.history-box,
+.os-box,
+.db-box,
+.obj-box,
+.software-box,
+.mathprogr-box,
+.vmks-box,
+.vot-box,
+.go-box,
 .literature-box,
-.intro_special-box,
-.physycs-box,
-.chem-box,
-.geography-box,
-.biology-box,
 .maths-box,
-.phylosophy-box,
-.it-box,
-.english-box
+.english-box,
+.russian-box
 {
     background-color: rgb(200, 226, 169);
     padding-bottom: 6em;
@@ -61,18 +61,18 @@ body {
     border-radius: 13px;
 }
 
-.intro_program-text,
-.history-text,
+.os-text,
+.db-text,
+.obj-text,
+.software-text,
+.mathprogr-text,
+.vmks-text,
+.vot-text,
+.go-text,
 .literature-text,
-.intro_special-text,
-.physycs-text,
-.chem-text,
-.geography-text,
-.biology-text,
 .maths-text,
-.phylosophy-text,
-.it-text,
-.english-text
+.english-text,
+.russian-text
 {
     display: flex;
     flex-direction: row;
