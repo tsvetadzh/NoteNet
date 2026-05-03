@@ -1,0 +1,91 @@
+p,h1,em {
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    background-color: rgb(210, 245, 208);
+    padding: 0;
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+    padding-top: 5em;
+    overflow-y: auto;
+}
+
+.first-row,
+.second-row
+{
+    display: flex;
+    align-items: center;
+    gap: 6em;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 5em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.third-row{
+    display: flex;
+    align-items: center;
+    gap: 3em;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 5em;
+    margin-bottom: 5em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.intro_program-box,
+.history-box,
+.literature-box,
+.intro_special-box,
+.physycs-box,
+.chem-box,
+.geography-box,
+.biology-box,
+.maths-box,
+.phylosophy-box,
+.it-box,
+.english-box
+{
+    background-color: rgb(200, 226, 169);
+    padding-bottom: 6em;
+    padding-top: 6em;
+    width: 15em;
+    height: 2em;
+    border-radius: 13px;
+}
+
+.intro_program-text,
+.history-text,
+.literature-text,
+.intro_special-text,
+.physycs-text,
+.chem-text,
+.geography-text,
+.biology-text,
+.maths-text,
+.phylosophy-text,
+.it-text,
+.english-text
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(14, 53, 1);
+    font-size: 1.2em;
+}
+
+
+
+
+
+
+
