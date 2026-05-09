@@ -266,3 +266,56 @@ def eleven_mpt(request):
 
 def eleven_networkssubj(request):
     return render(request, 'disciplines/11/networks.html')
+
+
+
+def twelve_iot(request):
+    return render(request, 'disciplines/12/IoT.html')
+
+def twelve_literature(request):
+    return render(request, 'disciplines/12/literature.html')
+
+def twelve_english(request):
+    return render(request, 'disciplines/12/english.html')
+
+def twelve_software_eng(request):
+    return render(request, 'disciplines/12/software_eng.html')
+
+def twelve_maths(request):
+    return render(request, 'disciplines/12/maths.html')
+
+def twelve_snetworks(request):
+    return render(request, 'disciplines/12/snetworks.html')
+
+def twelve_vmks(request):
+    return render(request, 'disciplines/12/vmks.html')
+
+def twelve_internet_prog(request):
+    return render(request, 'disciplines/12/internet_prog.html')
+
+def twelve_go(request):
+    return render(request, 'disciplines/12/go.html')
+
+def twelve_gr_inter(request):
+    return render(request, 'disciplines/12/gr_inter.html')
+
+def twelve_gr_design(request):
+    return render(request, 'disciplines/12/gr_design.html')
+
+def twelve_russian(request):
+    return render(request, 'disciplines/12/russian.html')
+
+def twelve_global_networks(request):
+    return render(request, 'disciplines/12/global_networks.html')
+
+def twelve_idkm(request):
+    return render(request, 'disciplines/12/idkm.html')
+
+def twelve_net_security(request):
+    return render(request, 'disciplines/12/net_security.html')
+
+def twelve_sistem_adm(request):
+    return render(request, 'disciplines/12/sistem_adm.html')
+
+def twelve_vot(request):
+    return render(request, 'disciplines/12/vot.html')
