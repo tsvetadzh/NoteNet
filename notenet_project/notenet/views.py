@@ -1,4 +1,191 @@
-from django.shortcuts import render
+from django.shortcuts import render 
+
+SUBJECTS = {
+    (8, 'system'): [
+        {'name': 'Intro into Programming', 'slug': 'inro_program'},
+        {'name': 'IT', 'slug': 'it'},
+        {'name': 'Intro to Specialty', 'slug': 'intro_special'},
+        {'name': 'English', 'slug': 'english'},
+        {'name': 'Physycs', 'slug': 'physycs'},
+        {'name': 'Geography', 'slug': 'geography'},
+        {'name': 'Biology', 'slug': 'biology'},
+        {'name': 'Chemistry', 'slug': 'chem'},
+        {'name': 'Phylosophy', 'slug': 'phylosophy'},
+        {'name': 'History', 'slug': 'history'},
+        {'name': 'Literature', 'slug': 'literature'},
+    ],
+
+    (8, 'networks'): [
+        {'name': 'Intro into Programming', 'slug': 'inro_program'},
+        {'name': 'IT', 'slug': 'it'},
+        {'name': 'Intro to Specialty', 'slug': 'intro_special'},
+        {'name': 'English', 'slug': 'english'},
+        {'name': 'Physycs', 'slug': 'physycs'},
+        {'name': 'Geography', 'slug': 'geography'},
+        {'name': 'Biology', 'slug': 'biology'},
+        {'name': 'Chemistry', 'slug': 'chem'},
+        {'name': 'Phylosophy', 'slug': 'phylosophy'},
+        {'name': 'History', 'slug': 'history'},
+        {'name': 'Literature', 'slug': 'literature'},
+    ],
+
+    (8, 'ai'): [
+        {'name': 'Intro into Programming', 'slug': 'inro_program'},
+        {'name': 'IT', 'slug': 'it'},
+        {'name': 'Intro to Specialty', 'slug': 'intro_special'},
+        {'name': 'English', 'slug': 'english'},
+        {'name': 'Physycs', 'slug': 'physycs'},
+        {'name': 'Geography', 'slug': 'geography'},
+        {'name': 'Biology', 'slug': 'biology'},
+        {'name': 'Chemistry', 'slug': 'chem'},
+        {'name': 'Phylosophy', 'slug': 'phylosophy'},
+        {'name': 'History', 'slug': 'history'},
+        {'name': 'Literature', 'slug': 'literature'},
+    ],
+
+    (9, 'system'): [
+        {'name': 'Scripts', 'slug': 'scripts'},
+        {'name': 'History', 'slug': 'history'},
+        {'name': 'Literature', 'slug': 'literature'},
+        {'name': 'Programming', 'slug': 'programming'},
+        {'name': 'Networks', 'slug': 'networkssubj'},
+        {'name': 'Electrotechnics', 'slug': 'electrotechnics'},
+        {'name': 'Physycs', 'slug': 'physycs'},
+        {'name': 'Gradivni', 'slug': 'gradivni'},
+        {'name': 'Chemistry', 'slug': 'chemistry'},
+        {'name': 'Geography', 'slug': 'geography'},
+        {'name': 'Biology', 'slug': 'biology'},
+        {'name': 'Maths', 'slug': 'maths'},
+        {'name': 'Enterprenuering', 'slug': 'enterprenuering'},
+        {'name': 'Phylosophy', 'slug': 'phylosophy'},
+        {'name': 'IT', 'slug': 'it'},
+        {'name': 'Zbut', 'slug': 'zbut'},
+        {'name': 'English', 'slug': 'english'},
+        {'name': 'Russian', 'slug': 'russian'},
+    ],
+
+    (9, 'networks'): [
+        {'name': 'Scripts', 'slug': 'scripts'},
+        {'name': 'History', 'slug': 'history'},
+        {'name': 'Literature', 'slug': 'literature'},
+        {'name': 'Programming', 'slug': 'programming'},
+        {'name': 'Networks', 'slug': 'networkssubj'},
+        {'name': 'Electrotechnics', 'slug': 'electrotechnics'},
+        {'name': 'Physycs', 'slug': 'physycs'},
+        {'name': 'Gradivni', 'slug': 'gradivni'},
+        {'name': 'Chemistry', 'slug': 'chemistry'},
+        {'name': 'Geography', 'slug': 'geography'},
+        {'name': 'Biology', 'slug': 'biology'},
+        {'name': 'Maths', 'slug': 'maths'},
+        {'name': 'Enterprenuering', 'slug': 'enterprenuering'},
+        {'name': 'Phylosophy', 'slug': 'phylosophy'},
+        {'name': 'IT', 'slug': 'it'},
+        {'name': 'Zbut', 'slug': 'zbut'},
+        {'name': 'English', 'slug': 'english'},
+        {'name': 'Russian', 'slug': 'russian'},
+    ],
+
+    (10, 'system'): [
+        {'name': 'Intro to OOP', 'slug': 'oop'},
+        {'name': 'Intro to ASD', 'slug': 'asd'},
+        {'name': 'Intro to VMKS', 'slug': 'vmks'},
+        {'name': 'Digital schemotech', 'slug': 'digital_sch'},
+        {'name': 'Analogy schemotech', 'slug': 'analogy_sch'},
+        {'name': 'Gradivni', 'slug': 'gradivni'},
+        {'name': 'Physycs', 'slug': 'physycs'},
+        {'name': 'Chemistry', 'slug': 'chem'},
+        {'name': 'Phylosophy', 'slug': 'phylosophy'},
+        {'name': 'History', 'slug': 'history'},
+        {'name': 'Literature', 'slug': 'literature'},
+        {'name': 'Iconomics', 'slug': 'iconomics'},
+        {'name': 'Geography', 'slug': 'geography'},
+        {'name': 'Biology', 'slug': 'biology'},
+        {'name': 'Russian', 'slug': 'russian'},
+        {'name': 'English', 'slug': 'english'},
+        {'name': 'Maths', 'slug': 'maths'},
+    ],
+
+    (10, 'networks'): [
+        {'name': 'Intro to OOP', 'slug': 'oop'},
+        {'name': 'CAPD', 'slug': 'comp_arch_per_dev'},
+        {'name': 'Intro to VMKS', 'slug': 'vmks'},
+        {'name': 'Digital schemotech', 'slug': 'digital_sch'},
+        {'name': 'Analogy schemotech', 'slug': 'analogy_sch'},
+        {'name': 'CMr', 'slug': 'intro_cmr'},
+        {'name': 'Physycs', 'slug': 'physycs'},
+        {'name': 'Chemistry', 'slug': 'chem'},
+        {'name': 'Phylosophy', 'slug': 'phylosophy'},
+        {'name': 'History', 'slug': 'history'},
+        {'name': 'Literature', 'slug': 'literature'},
+        {'name': 'Iconomics', 'slug': 'iconomics'},
+        {'name': 'Geography', 'slug': 'geography'},
+        {'name': 'Biology', 'slug': 'biology'},
+        {'name': 'Russian', 'slug': 'russian'},
+        {'name': 'English', 'slug': 'english'},
+        {'name': 'Maths', 'slug': 'maths'},
+    ],
+
+    (11, 'system'): [
+        {'name': 'OS', 'slug': 'os'},
+        {'name': 'Databases', 'slug': 'database'},
+        {'name': 'Object-oriented programming', 'slug': 'object_progr'},
+        {'name': 'Software', 'slug': 'software'},
+        {'name': 'Math programming', 'slug': 'math_progr'},
+        {'name': 'VMKS', 'slug': 'vmks'},
+        {'name': 'VOT', 'slug': 'vot'},
+        {'name': 'GO', 'slug': 'go'},
+        {'name': 'Maths', 'slug': 'maths'},
+        {'name': 'Russian', 'slug': 'russian'},
+        {'name': 'Literature', 'slug': 'literature'},
+        {'name': 'English', 'slug': 'english'},
+    ],
+
+    (11, 'networks'): [
+        {'name': 'APE', 'slug': 'ape'},
+        {'name': 'USSS', 'slug': 'usss'},
+        {'name': 'BOMT', 'slug': 'bomt'},
+        {'name': 'Networks', 'slug': 'networkssubj'},
+        {'name': 'Math programming', 'slug': 'mpt'},
+        {'name': 'VMKS', 'slug': 'vmks'},
+        {'name': 'KTT', 'slug': 'ktt'},
+        {'name': 'GO', 'slug': 'go'},
+        {'name': 'Maths', 'slug': 'maths'},
+        {'name': 'Russian', 'slug': 'russian'},
+        {'name': 'Literature', 'slug': 'literature'},
+        {'name': 'English', 'slug': 'english'},
+    ],
+
+    (12, 'system'): [
+        {'name': 'IoT', 'slug': 'iot'},
+        {'name': 'Literature', 'slug': 'literature'},
+        {'name': 'English', 'slug': 'english'},
+        {'name': 'Software Engineering', 'slug': 'software_eng'},
+        {'name': 'Maths', 'slug': 'maths'},
+        {'name': 'GO', 'slug': 'go'},
+        {'name': 'VMKS', 'slug': 'vmks'},
+        {'name': 'Internet Programming', 'slug': 'internet_prog'},
+        {'name': 'Graphical Interface', 'slug': 'gr_inter'},
+        {'name': 'Graphical Design', 'slug': 'gr_design'},
+        {'name': 'Russian', 'slug': 'russian'},
+        {'name': 'IDKM', 'slug': 'idkm'},
+        {'name': 'VOT', 'slug': 'vot'},
+    ],
+
+    (12, 'networks'): [
+        {'name': 'Switched Networks', 'slug': 'snetworks'},
+        {'name': 'Global Networks', 'slug': 'global_networks'},
+        {'name': 'Network Security', 'slug': 'net_security'},
+        {'name': 'System Administration', 'slug': 'sistem_adm'},
+        {'name': 'IoT', 'slug': 'iot'},
+        {'name': 'VMKS', 'slug': 'vmks'},
+        {'name': 'Literature', 'slug': 'literature'},
+        {'name': 'English', 'slug': 'english'},
+        {'name': 'Maths', 'slug': 'maths'},
+        {'name': 'Russian', 'slug': 'russian'},
+    ],
+}
+
+_SUBJECT_NAMES = {s['slug']: s['name'] for subjects in SUBJECTS.values() for s in subjects}
 
 def homepage(request):
     return render(request, 'homepage.html')
@@ -33,289 +220,19 @@ def class_twelve(request):
     return render(request, 'classes/twelve.html')
 
 
+def subject_list(request, grade, group):
+    subjects = SUBJECTS.get((grade, group), [])
+    return render(request, 'subjects/subject_list.html', {
+        'subjects': subjects,
+        'grade': grade,
+        'group': group,
+    })
+
+def discipline(request, grade, subject):
+    name = _SUBJECT_NAMES.get(subject, subject.replace('_', ' ').title())
+    return render(request, 'disciplines/discipline.html', {
+        'grade': grade,
+        'subject': subject,
+        'subject_name': name,
+    })
 
-def eight(request):
-    return render(request, 'subjects/eight.html')
-
-def nine_system(request):
-    return render(request, 'subjects/nine_system.html')
-
-def nine_networks(request):
-    return render(request, 'subjects/nine_networks.html')
-
-def ten_system(request):
-    return render(request, 'subjects/ten_system.html')
-
-def ten_networks(request):
-    return render(request, 'subjects/ten_networks.html')
-
-def eleven_system(request):
-    return render(request, 'subjects/eleven_system.html')
-
-def eleven_networks(request):
-    return render(request, 'subjects/eleven_networks.html')
-
-def twelve_system(request):
-    return render(request, 'subjects/twelve_system.html')
-
-def twelve_networks(request):
-    return render(request, 'subjects/twelve_networks.html')
-
-
-
-def nine_networkssubj(request):
-    return render(request, 'disciplines/9/networks.html')
-
-def nine_electrotechnics(request):
-    return render(request, 'disciplines/9/electrotechnics.html')
-
-def nine_literature(request):
-    return render(request, 'disciplines/9/literature.html')
-
-def nine_chemistry(request):
-    return render(request, 'disciplines/9/chemistry.html')
-
-def nine_geography(request):
-    return render(request, 'disciplines/9/geography.html')
-
-def nine_scripts(request):
-    return render(request, 'disciplines/9/scripts.html')
-
-def nine_history(request):
-    return render(request, 'disciplines/9/history.html')
-
-def nine_programming(request):
-    return render(request, 'disciplines/9/programming.html')
-
-def nine_zbut(request):
-    return render(request, 'disciplines/9/zbut.html')
-
-def nine_gradivni(request):
-    return render(request, 'disciplines/9/gradivni.html')
-
-def nine_physycs(request):
-    return render(request, 'disciplines/9/physycs.html')
-
-def nine_phylosophy(request):
-    return render(request, 'disciplines/9/phylosophy.html')
-
-def nine_russian(request):
-    return render(request, 'disciplines/9/russian.html')
-
-def nine_maths(request):
-    return render(request, 'disciplines/9/maths.html')
-
-def nine_english(request):
-    return render(request, 'disciplines/9/english.html')
-
-def nine_biology(request):
-    return render(request, 'disciplines/9/biology.html')
-
-def nine_it(request):
-    return render(request, 'disciplines/9/it.html')
-
-def nine_enterprenuering(request):
-    return render(request, 'disciplines/9/enterprenuering.html')
-
-
-
-def eight_biology(request):
-    return render(request, 'disciplines/8/biology.html')
-
-def eight_physycs(request):
-    return render(request, 'disciplines/8/physycs.html')
-
-def eight_intro_program(request):
-    return render(request, 'disciplines/8/intro_program.html')
-
-def eight_literature(request):
-    return render(request, 'disciplines/8/literature.html')
-
-def eight_english(request):
-    return render(request, 'disciplines/8/english.html')
-
-def eight_history(request):
-    return render(request, 'disciplines/8/history.html')
-
-def eight_intro_special(request):
-    return render(request, 'disciplines/8/intro_special.html')
-
-def eight_it(request):
-    return render(request, 'disciplines/8/it.html')
-
-def eight_geography(request):
-    return render(request, 'disciplines/8/geography.html')
-
-def eight_chem(request):
-    return render(request, 'disciplines/8/chem.html')
-
-def eight_phylosophy(request):
-    return render(request, 'disciplines/8/phylosophy.html')
-
-
-
-def ten_physycs(request):
-    return render(request, 'disciplines/10/physycs.html')
-
-def ten_history(request):
-    return render(request, 'disciplines/10/history.html')
-
-def ten_russian(request):
-    return render(request, 'disciplines/10/russian.html')
-
-def ten_iconomics(request):
-    return render(request, 'disciplines/10/iconomics.html')
-
-def ten_literature(request):
-    return render(request, 'disciplines/10/literature.html')
-
-def ten_oop(request):
-    return render(request, 'disciplines/10/oop.html')
-
-def ten_biology(request):
-    return render(request, 'disciplines/10/biology.html')
-
-def ten_maths(request):
-    return render(request, 'disciplines/10/maths.html')
-
-def ten_asd(request):
-    return render(request, 'disciplines/10/asd.html')
-
-def ten_vmks(request):
-    return render(request, 'disciplines/10/vmks.html')
-
-def ten_gradivni(request):
-    return render(request, 'disciplines/10/gradivni.html')
-
-def ten_chem(request):
-    return render(request, 'disciplines/10/chem.html')
-
-def ten_english(request):
-    return render(request, 'disciplines/10/english.html')
-
-def ten_geography(request):
-    return render(request, 'disciplines/10/geography.html')
-
-def ten_digital_sch(request):
-    return render(request, 'disciplines/10/digital_sch.html')
-
-def ten_analogy_sch(request):
-    return render(request, 'disciplines/10/analogy_sch.html')
-
-def ten_phylosophy(request):
-    return render(request, 'disciplines/10/phylosophy.html')
-
-def ten_comp_arch_per_dev(request):
-    return render(request, 'disciplines/10/comp_arch_per_dev.html')
-
-def ten_intro_cmr(request):
-    return render(request, 'disciplines/10/intro_cmr.html')
-
-
-
-def eleven_os(request):
-    return render(request, 'disciplines/11/os.html')
-
-def eleven_maths(request):
-    return render(request, 'disciplines/11/maths.html')
-
-def eleven_database(request):
-    return render(request, 'disciplines/11/database.html')
-
-def eleven_english(request):
-    return render(request, 'disciplines/11/english.html')
-
-def eleven_math_progr(request):
-    return render(request, 'disciplines/11/math_progr.html')
-
-def eleven_object_progr(request):
-    return render(request, 'disciplines/11/object_progr.html')
-
-def eleven_literature(request):
-    return render(request, 'disciplines/11/literature.html')
-
-def eleven_software(request):
-    return render(request, 'disciplines/11/software.html')
-
-def eleven_russian(request):
-    return render(request, 'disciplines/11/russian.html')
-
-def eleven_vmks(request):
-    return render(request, 'disciplines/11/vmks.html')
-
-def eleven_go(request):
-    return render(request, 'disciplines/11/go.html')
-
-def eleven_vot(request):
-    return render(request, 'disciplines/11/vot.html')
-
-def eleven_ape(request):
-    return render(request, 'disciplines/11/ape.html')
-
-def eleven_ktt(request):
-    return render(request, 'disciplines/11/ktt.html')
-
-def eleven_usss(request):
-    return render(request, 'disciplines/11/usss.html')
-
-def eleven_bomt(request):
-    return render(request, 'disciplines/11/bomt.html')
-
-def eleven_mpt(request):
-    return render(request, 'disciplines/11/mpt.html')
-
-def eleven_networkssubj(request):
-    return render(request, 'disciplines/11/networks.html')
-
-
-
-def twelve_iot(request):
-    return render(request, 'disciplines/12/IoT.html')
-
-def twelve_literature(request):
-    return render(request, 'disciplines/12/literature.html')
-
-def twelve_english(request):
-    return render(request, 'disciplines/12/english.html')
-
-def twelve_software_eng(request):
-    return render(request, 'disciplines/12/software_eng.html')
-
-def twelve_maths(request):
-    return render(request, 'disciplines/12/maths.html')
-
-def twelve_snetworks(request):
-    return render(request, 'disciplines/12/snetworks.html')
-
-def twelve_vmks(request):
-    return render(request, 'disciplines/12/vmks.html')
-
-def twelve_internet_prog(request):
-    return render(request, 'disciplines/12/internet_prog.html')
-
-def twelve_go(request):
-    return render(request, 'disciplines/12/go.html')
-
-def twelve_gr_inter(request):
-    return render(request, 'disciplines/12/gr_inter.html')
-
-def twelve_gr_design(request):
-    return render(request, 'disciplines/12/gr_design.html')
-
-def twelve_russian(request):
-    return render(request, 'disciplines/12/russian.html')
-
-def twelve_global_networks(request):
-    return render(request, 'disciplines/12/global_networks.html')
-
-def twelve_idkm(request):
-    return render(request, 'disciplines/12/idkm.html')
-
-def twelve_net_security(request):
-    return render(request, 'disciplines/12/net_security.html')
-
-def twelve_sistem_adm(request):
-    return render(request, 'disciplines/12/sistem_adm.html')
-
-def twelve_vot(request):
-    return render(request, 'disciplines/12/vot.html')
