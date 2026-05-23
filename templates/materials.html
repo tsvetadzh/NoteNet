@@ -30,25 +30,70 @@
             </div>
         </div>
 
+        <div class="choose">
+                <p>Choose a grade:</p>
+        </div>
+
         <div class="main-part">
-            <div class="eight">
-                <a href="{% url 'class_eight'%}">8</a>
+            <div class="grade">
+                <img 
+                    src="{% static 'assets/eight.png' %}" 
+                    class="grade-img"
+                >
+                <a href="{% url 'class_eight'%}">
+                    <p class="grade-name">
+                        8th grade
+                    </p>
+                </a>
             </div>
 
-            <div class="nine">
-                <a class="nine-text" href="{% url 'class_nine'%}">9</a>
+            <div class="grade">
+                <img 
+                    src="{% static 'assets/nine.png' %}" 
+                    class="grade-img"
+                >
+                <a class="nine-text" href="{% url 'class_nine'%}">
+                    <p class="grade-name">
+                        9th grade
+                    </p>
+                </a>
+                </a>
             </div>
 
-            <div class="ten">
-                <a class="ten-text" href="{% url 'class_ten'%}">10</a>
+            <div class="grade">
+                <img 
+                    src="{% static 'assets/ten.png' %}" 
+                    class="grade-img"
+                >
+                <a class="ten-text" href="{% url 'class_ten'%}">
+                    <p class="grade-name">
+                        10th grade
+                    </p>
+                </a>
             </div>
 
-            <div class="eleven">
-                <a class="eleven-text" href="{% url 'class_eleven'%}">11</a>
+            <div class="grade">
+                <img 
+                    src="{% static 'assets/eleven.png' %}" 
+                    class="grade-img"
+                >
+                <a class="eleven-text" href="{% url 'class_eleven'%}">
+                    <p class="grade-name">
+                        11th grade
+                    </p>
+                </a>
             </div>
 
-            <div class="twelve">
-                <a class="twelve-text" href="{% url 'class_twelve'%}">12</a>
+            <div class="grade">
+                <img 
+                    src="{% static 'assets/twelve.png' %}" 
+                    class="grade-img"
+                >
+                <a class="twelve-text" href="{% url 'class_twelve'%}">
+                    <p class="grade-name">
+                        12th grade
+                    </p>
+                </a>
             </div>
         </div>
     </body>
