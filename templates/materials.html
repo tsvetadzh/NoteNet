@@ -10,10 +10,23 @@
     <body>
         <div class="header">
             <div class="left-side">
-                <div id="logo"><img src="{% static 'assets/logo.png' %}"></div>
-                <div id="tittle"><p>NoteNet</p></div>
+                <div id="logo">
+                    <a href="{% url 'homepage' %}">
+                        <img src="{% static 'assets/logo.png' %}">
+                    </a>
+                </div>
+                <div id="tittle">
+                    <p>NoteNet</p>
+                </div>
             </div>
             <div class="right-side">
+                <span class="search-icon"></span>
+                <input type="search" class="searchbox">
+                <div class="profile">
+                    <a href="{% url 'profile' %}">
+                        <img class="icon" src="{% static 'assets/profile.png'%}">
+                    </a>
+               </div>
                <input type="checkbox" id="menu-toggle">
                <label class="hamburger-label" for="menu-toggle">
                     <span></span>
