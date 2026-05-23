@@ -204,20 +204,26 @@ def profile(request):
 
 
 
-def class_eight(request):
-    return render(request, 'classes/eight.html')
+_GRADE_INFO = {
+    8:  {'ordinal': '8th',  'prefix': 'eight'},
+    9:  {'ordinal': '9th',  'prefix': 'nine'},
+    10: {'ordinal': '10th', 'prefix': 'ten'},
+    11: {'ordinal': '11th', 'prefix': 'eleven'},
+    12: {'ordinal': '12th', 'prefix': 'twelve'},
+}
 
-def class_nine(request):
-    return render(request, 'classes/nine.html')
-
-def class_ten(request):
-    return render(request, 'classes/ten.html')
-
-def class_eleven(request):
-    return render(request, 'classes/eleven.html')
-
-def class_twelve(request):
-    return render(request, 'classes/twelve.html')
+def class_grade(request, grade):
+    from django.http import Http404
+    info = _GRADE_INFO.get(grade)
+    if not info:
+        raise Http404
+    prefix = info['prefix']
+    return render(request, 'classes/class.html', {
+        'grade': grade,
+        'grade_name': info['ordinal'],
+        'system_url': f'{prefix}_system',
+        'networks_url': f'{prefix}_networks',
+    })
 
 
 def subject_list(request, grade, group):

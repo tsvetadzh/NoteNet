@@ -4,7 +4,7 @@ p,h1,em {
 }
 
 html, body {
-    background-color: rgb(219, 233, 238);
+    background-color: rgb(238, 219, 235);
     padding: 0;
     margin: 0;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -24,34 +24,34 @@ body {
     padding-top: 7em;
 }
 
-.a{
+.a, .b, .c, .d {
     background-color: rgb(169, 226, 169);
     padding-right: 8em;
     padding-left: 8em;
     padding-bottom: 13em;
     padding-top: 13em;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-.b{
-    background-color: rgb(169, 226, 169);
-    padding-right: 8em;
-    padding-left: 8em;
-    padding-bottom: 13em;
-    padding-top: 13em;
+.grade-name{
+    text-decoration: none;
+    font-size: 1.6em;
+    color:rgb(0 67 105);
 }
 
-.c{
-    background-color: rgb(169, 226, 169);
-    padding-right: 8em;
-    padding-left: 8em;
-    padding-bottom: 13em;
-    padding-top: 13em;
+.grade-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.67;
 }
 
-.d{
-    background-color: rgb(169, 226, 169);
-    padding-right: 8em;
-    padding-left: 8em;
-    padding-bottom: 13em;
-    padding-top: 13em;
+.a-text {
+    position: relative;
+    z-index: 1;
 }

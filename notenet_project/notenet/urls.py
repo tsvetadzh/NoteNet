@@ -8,11 +8,7 @@ urlpatterns = [
     path('myclass/', views.myclass, name='myclass'),
     path('profile/', views.profile, name='profile'),
 
-    path('class/8/', views.class_eight, name='class_eight'),
-    path('class/9/', views.class_nine, name='class_nine'),
-    path('class/10/', views.class_ten, name='class_ten'),
-    path('class/11/', views.class_eleven, name='class_eleven'),
-    path('class/12/', views.class_twelve, name='class_twelve'),
+    path('class/<int:grade>/', views.class_grade, name='class_grade'),
 
     path('class/8/system', views.subject_list, {'grade': 8, 'group': 'system'}, name='eight_system'),
     path('class/8/system', views.subject_list, {'grade': 8, 'group': 'networks'}, name='eight_networks'),

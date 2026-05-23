@@ -1,0 +1,143 @@
+            p,h1,em {
+                padding: 0;
+                margin: 0;
+            }
+            
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-left: 1em;
+                padding-right: 1em;
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                z-index: 1;
+                height: 5em;
+                background-color: rgb(221, 143, 192);
+            }
+
+            .left-side {
+                display: inline-flex;
+            }
+
+            .right-side {
+                display: flex;
+                align-items: center;
+                position: relative;
+            }
+
+            #logo img {
+                height: 4em;
+                width: auto;
+                margin-top: 0.5em;
+                margin-right: 0.5em;
+            }
+
+            #tittle {
+                justify-content: center;
+                color:rgb(0 67 105);
+                text-decoration: none;
+                font-family:'Times New Roman', Times, serif;
+                font-size: 1.5em;
+                margin-top: 1em;
+            }
+
+            #tittle:hover {
+                color: rgb(63, 63, 63);
+            }
+
+            .searchbox{
+                border: none;
+                border-radius: 20px;
+                outline: none;
+                transition: 0.3s;
+                padding-left: 8em;
+                padding-right: 8em;
+                margin-right: 3em;
+                padding-top: 0.5em;
+                padding-bottom: 0.5em;
+                background-color: rgb(237, 219, 238);
+            }
+
+            .searchbox:hover{
+                background-color: rgb(245, 217, 239);
+                border-radius: 20px;
+                outline: none;
+            }
+
+            #menu-toggle {
+                display: none;
+            }
+
+            .hamburger-label {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 2em;
+                height: 1.5em;
+                cursor: pointer;
+            }
+
+            .hamburger-label span {
+                display: block;
+                height: 1em;
+                width: 90%;
+                background-color: rgb(105, 0, 84);
+                border-radius: 2px;
+                margin: 2px;
+            }
+
+            .hamburger-label:hover span {
+                background-color: rgb(63, 63, 63);
+            }
+
+            .popup-menu {
+                display: none;
+                justify-content: center;
+                position: absolute;
+                top: 3.5em;
+                right: 0;
+                background-color: rgb(234, 138, 202);
+                border-radius: 6px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 100;
+                font-size: 1em;
+            }
+
+            #menu-toggle:checked ~ .popup-menu {
+                display: block;
+            }
+
+            .popup-menu a {
+                display: block;
+                padding-left: 4em;
+                padding-right: 4em;
+                padding-top: 1em;
+                padding-bottom: 1em;
+                text-decoration: none;
+                box-shadow: 0 2px 2px rgba(77, 70, 70, 0.1);
+                color: black;
+                white-space: nowrap;
+            }
+
+            .popup-menu a:hover{
+                background-color: rgb(226, 169, 203);
+            }
+
+            .popup-menu a:first-child {
+                border-radius: 6px 6px 0 0;
+            }
+
+            .popup-menu a:last-child {
+                border-radius: 0 0 6px 6px;
+            }
+
+            .icon{
+                height: 2.1em;
+                width: 2.1em;
+                object-fit: cover;
+                margin-right: 2em;
+                margin-top: 0.2em;
+            }
