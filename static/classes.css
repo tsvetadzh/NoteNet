@@ -50,8 +50,3 @@ body {
     object-fit: cover;
     opacity: 0.67;
 }
-
-.a-text {
-    position: relative;
-    z-index: 1;
-}
