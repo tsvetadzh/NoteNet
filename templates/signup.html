@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up — NoteNet</title>
+        <meta name="description" content="Create a NoteNet account to start sharing and accessing class notes.">
+        <link rel="stylesheet" href="{% static 'header.css' %}">
+        <link rel="stylesheet" href="{% static 'auth.css' %}">
+    </head>
+
+    <body>
+        <!-- ── Header ───────────────────────────── -->
+        <div class="header">
+            <div class="left-side">
+                <div id="logo">
+                    <a href="{% url 'homepage' %}">
+                        <img src="{% static 'assets/logo.png' %}">
+                    </a>
+                </div>
+                <div id="tittle">
+                    <p>NoteNet</p>
+                </div>
+            </div>
+            <div class="right-side">
+                <span class="search-icon"></span>
+                <input type="search" class="searchbox">
+                <div class="profile">
+                    <a href="{% url 'profile' %}">
+                        <img class="icon" src="{% static 'assets/profile.png'%}">
+                    </a>
+                </div>
+                <input type="checkbox" id="menu-toggle">
+                <label class="hamburger-label" for="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+                <div class="popup-menu">
+                    <a href="{% url 'homepage' %}">Homepage</a>
+                    <a href="{% url 'materials' %}">Materials</a>
+                    <a href="{% url 'addnote' %}">Add notes</a>
+                    <a href="{% url 'myclass' %}">My class</a>
+                    <a href="{% url 'profile' %}">My profile</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Signup card ───────────────────────── -->
+        <div class="auth-wrapper">
+            <div class="auth-card">
+                <h1>Create account</h1>
+                <p class="subtitle">Join NoteNet and start sharing notes</p>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="error-msg">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post" action="{% url 'signup' %}">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="signup-username">Username</label>
+                        <input
+                            type="text"
+                            id="signup-username"
+                            name="username"
+                            placeholder="Choose a username"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-email">Email <span style="font-weight:normal; color:#aaa;">(optional)</span></label>
+                        <input
+                            type="email"
+                            id="signup-email"
+                            name="email"
+                            placeholder="your@email.com"
+                            autocomplete="email"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-password1">Password</label>
+                        <input
+                            type="password"
+                            id="signup-password1"
+                            name="password1"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-password2">Confirm Password</label>
+                        <input
+                            type="password"
+                            id="signup-password2"
+                            name="password2"
+                            placeholder="Repeat your password"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn-submit">Sign Up</button>
+                </form>
+
+                <p class="auth-switch">
+                    Already have an account? <a href="{% url 'login' %}">Log in</a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

@@ -7,6 +7,9 @@ urlpatterns = [
     path('addnote/', views.addnote, name='addnote'),
     path('myclass/', views.myclass, name='myclass'),
     path('profile/', views.profile, name='profile'),
+    path('login/', views.login_view, name='login'),
+    path('signup/', views.signup_view, name='signup'),
+    path('logout/', views.logout_view, name='logout'),
 
     path('class/<int:grade>/', views.class_grade, name='class_grade'),
 

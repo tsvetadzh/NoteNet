@@ -1,14 +1,17 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>My profile</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Profile — NoteNet</title>
+        <meta name="description" content="Your NoteNet profile page.">
         <link rel="stylesheet" href="{% static 'header.css' %}">
-        <link rel="stylesheet" href="{% static 'myclass.css' %}">
-
+        <link rel="stylesheet" href="{% static 'profile.css' %}">
     </head>
 
     <body>
+        <!-- ── Header ───────────────────────────── -->
         <div class="header">
             <div class="left-side">
                 <div id="logo">
@@ -27,22 +30,63 @@
                     <a href="{% url 'profile' %}">
                         <img class="icon" src="{% static 'assets/profile.png'%}">
                     </a>
-               </div>
-               <input type="checkbox" id="menu-toggle">
-               <label class="hamburger-label" for="menu-toggle">
+                </div>
+                <input type="checkbox" id="menu-toggle">
+                <label class="hamburger-label" for="menu-toggle">
                     <span></span>
                     <span></span>
                     <span></span>
-               </label>
-               <div class="popup-menu">
-                   <a href="{% url 'homepage' %}">Homepage</a>
-                   <a href="{% url 'materials' %}">Materials</a>
-                   <a href="{% url 'addnote' %}">Add notes</a>
-                   <a href="{% url 'myclass' %}">My class</a>
-                   <a href="{% url 'profile' %}">My profile</a>
-               </div>
+                </label>
+                <div class="popup-menu">
+                    <a href="{% url 'homepage' %}">Homepage</a>
+                    <a href="{% url 'materials' %}">Materials</a>
+                    <a href="{% url 'addnote' %}">Add notes</a>
+                    <a href="{% url 'myclass' %}">My class</a>
+                    <a href="{% url 'profile' %}">My profile</a>
+                </div>
             </div>
         </div>
 
+        <!-- ── Profile card ──────────────────────── -->
+        <div class="profile-wrapper">
+            <div class="profile-card">
+
+                <!-- Avatar: first letter of username -->
+                <div class="avatar-circle">
+                    {{ user.username|first|upper }}
+                </div>
+
+                <h1>{{ user.username }}</h1>
+                <p class="profile-email">
+                    {% if user.email %}
+                        {{ user.email }}
+                    {% else %}
+                        No email set
+                    {% endif %}
+                </p>
+
+                <!-- Info rows -->
+                <div class="profile-info">
+                    <div class="info-row">
+                        <span class="info-label">Username</span>
+                        <span class="info-value">{{ user.username }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">
+                            {% if user.email %}{{ user.email }}{% else %}—{% endif %}
+                        </span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Member since</span>
+                        <span class="info-value">{{ user.date_joined|date:"N j, Y" }}</span>
+                    </div>
+                </div>
+
+                <!-- Logout -->
+                <a href="{% url 'logout' %}" class="btn-logout">Log Out</a>
+
+            </div>
+        </div>
     </body>
 </html>
