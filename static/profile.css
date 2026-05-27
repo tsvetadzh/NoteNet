@@ -135,3 +135,15 @@ body {
 .btn-logout:active {
     transform: translateY(0);
 }
+
+/* Simulate button */
+.btn-simulate:hover {
+    background: rgb(0, 67, 105) !important;
+    color: white !important;
+    border-style: solid !important;
+    box-shadow: 0 4px 12px rgba(0, 67, 105, 0.2);
+    transform: translateY(-1px);
+}
+.btn-simulate:active {
+    transform: translateY(0);
+}

@@ -48,60 +48,85 @@
         </div>
 
         <div class="main-part">
-            <div class="grade">
+            <!-- 8th Grade -->
+            <div class="grade {% if profile.grade_number == 8 %}active-grade{% else %}locked{% endif %}">
                 <img 
                     src="{% static 'assets/eight.png' %}" 
                     class="grade-img"
                 >
+                {% if profile.grade_number == 8 %}
                 <a href="{% url 'class_grade' 8 %}">
+                {% else %}
+                <a href="#" onclick="return false;">
+                {% endif %}
                     <p class="grade-name">
                         8th grade
                     </p>
                 </a>
             </div>
 
-            <div class="grade">
+            <!-- 9th Grade -->
+            <div class="grade {% if profile.grade_number == 9 %}active-grade{% else %}locked{% endif %}">
                 <img
                     src="{% static 'assets/nine.png' %}"
                     class="grade-img"
                 >
+                {% if profile.grade_number == 9 %}
                 <a class="nine-text" href="{% url 'class_grade' 9 %}">
+                {% else %}
+                <a class="nine-text" href="#" onclick="return false;">
+                {% endif %}
                     <p class="grade-name">
                         9th grade
                     </p>
                 </a>
             </div>
 
-            <div class="grade">
+            <!-- 10th Grade -->
+            <div class="grade {% if profile.grade_number == 10 %}active-grade{% else %}locked{% endif %}">
                 <img
                     src="{% static 'assets/ten.png' %}"
                     class="grade-img"
                 >
+                {% if profile.grade_number == 10 %}
                 <a class="ten-text" href="{% url 'class_grade' 10 %}">
+                {% else %}
+                <a class="ten-text" href="#" onclick="return false;">
+                {% endif %}
                     <p class="grade-name">
                         10th grade
                     </p>
                 </a>
             </div>
 
-            <div class="grade">
+            <!-- 11th Grade -->
+            <div class="grade {% if profile.grade_number == 11 %}active-grade{% else %}locked{% endif %}">
                 <img
                     src="{% static 'assets/eleven.png' %}"
                     class="grade-img"
                 >
+                {% if profile.grade_number == 11 %}
                 <a class="eleven-text" href="{% url 'class_grade' 11 %}">
+                {% else %}
+                <a class="eleven-text" href="#" onclick="return false;">
+                {% endif %}
                     <p class="grade-name">
                         11th grade
                     </p>
                 </a>
             </div>
 
-            <div class="grade">
+            <!-- 12th Grade -->
+            <div class="grade {% if profile.grade_number == 12 %}active-grade{% else %}locked{% endif %}">
                 <img
                     src="{% static 'assets/twelve.png' %}"
                     class="grade-img"
                 >
+                {% if profile.grade_number == 12 %}
                 <a class="twelve-text" href="{% url 'class_grade' 12 %}">
+                {% else %}
+                <a class="twelve-text" href="#" onclick="return false;">
+                {% endif %}
                     <p class="grade-name">
                         12th grade
                     </p>
