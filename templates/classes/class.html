@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>{{ grade_name }} grade</title>
-        <link rel="stylesheet" href="{% static 'header_two.css' %}">
+        <link rel="stylesheet" href="{% static 'header.css' %}">
         <link rel="stylesheet" href="{% static 'classes.css' %}">
     </head>
 
@@ -24,7 +24,7 @@
                 <input type="search" class="searchbox">
                 <div class="profile">
                     <a href="{% url 'profile' %}">
-                        <img class="icon" src="{% static 'assets/pink.png'%}">
+                        <img class="icon" src="{% static 'assets/profile.png'%}">
                     </a>
                </div>
                <input type="checkbox" id="menu-toggle">
@@ -47,7 +47,7 @@
             <div class="a">
                 <a href="{% url system_url %}">
                     <img
-                        src="{% static 'assets/a.jpg' %}"
+                        src="{% static 'assets/a.png' %}"
                         class="grade-img"
                     >
                 </a>
@@ -56,7 +56,7 @@
             <div class="b">
                 <a href="{% url system_url %}">
                     <img
-                        src="{% static 'assets/b.jpg' %}"
+                        src="{% static 'assets/b.png' %}"
                         class="grade-img"
                     >
                 </a>
@@ -65,7 +65,7 @@
             <div class="c">
                 <a href="{% url system_url %}">
                     <img
-                        src="{% static 'assets/c.jpg' %}"
+                        src="{% static 'assets/c.png' %}"
                         class="grade-img"
                     >
                 </a>
@@ -74,7 +74,7 @@
             <div class="d">
                 <a href="{% url networks_url %}">
                     <img
-                        src="{% static 'assets/d.jpg' %}"
+                        src="{% static 'assets/d.png' %}"
                         class="grade-img"
                     >
                 </a>

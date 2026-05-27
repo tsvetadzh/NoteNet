@@ -4,7 +4,7 @@
     <head>
         <title>Add notes</title>
         <link rel="stylesheet" href="{% static 'header.css' %}">
-        <link rel="stylesheet" href="{% static 'myclass.css' %}">
+        <link rel="stylesheet" href="{% static 'addnote.css' %}">
     </head>
 
     <body>
@@ -41,6 +41,67 @@
                    <a href="{% url 'profile' %}">My profile</a>
                </div>
             </div>
+        </div>
+
+        <div class="left-side">
+                   
+            <div class="auth-card">
+                <h1>Add notes</h1>
+
+                <form method="post" action="{% url 'addnote' %}">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="note-class">Class</label>
+                        <input
+                            type="text"
+                            id="note-class"
+                            name="class"
+                            placeholder="e.g. 10"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="note-letter">Letter</label>
+                        <select id="note-letter" name="letter" required>
+                            <option value="" disabled selected>e.g A</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="note-subject">Subject</label>
+                        <input
+                            type="text"
+                            id="note-subject"
+                            name="subject"
+                            placeholder="e.g. Maths"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="note-date">Date</label>
+                        <input
+                            type="date"
+                            id="note-date"
+                            name="date"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn-submit">Add Note</button>
+                </form>
+            </div>
+        </div>
+        </div>
+
+        <div class="right-side">
+
         </div>
 
     </body>
