@@ -16,6 +16,7 @@
                 z-index: 1;
                 height: 5em;
                 background-color: rgb(118 152 201);
+                box-shadow: 0 3px 20px rgba(0, 0, 0, 0.7);
             }
 
             .left-side {
@@ -58,7 +59,7 @@
                 margin-right: 3em;
                 padding-top: 0.5em;
                 padding-bottom: 0.5em;
-                background-color: rgb(219, 233, 238);
+                background-color: rgb(224, 246, 254);
             }
 
             .searchbox:hover{

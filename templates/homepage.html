@@ -44,11 +44,36 @@
         </div>
 
         <div class="welcome">
-            {%if profile%}
-                <h1 class="welcome-text">Welcome, {{profile.full_name}}!</h1>
-            {%else%}
-                <h1 class="welcome-text">Welcome to NoteNet!</h1>
-            {%endif%}
+            <img src="{% static 'assets/homepage_banner.png'%}" class="welcome-img">
+            <div class="welcome-text-part">
+                {%if profile%}
+                    <h1 class="welcome-text">Welcome, {{profile.full_name}}!</h1>
+                {%else%}
+                    <h1 class="welcome-text">Welcome to NoteNet!</h1>
+                {%endif%}
+            </div>
+        </div>
+
+        <div class="points">
+            
+        </div>
+
+        <div class="suggestions">
+            <div class="sug-box">
+                {%if profile%}
+                    <a href="{% url 'myclass' %}" class="text">View your class</a>
+                {%else%}
+                    <a href="{% url 'materials' %}" class="text">View materials</a>
+                {%endif%}
+            </div>
+
+            <div class="sug-box">
+                {%if profile%}
+                    <a href="{% url 'addnote' %}" class="text">Add notes</a>
+                {%else%}
+                    <a href="{% url 'profile' %}" class="text">Create an account</a>
+                {%endif%}
+            </div>
         </div>
 
     </body>
