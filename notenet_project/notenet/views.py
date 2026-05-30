@@ -219,7 +219,7 @@ def homepage(request):
         profile = check_profile(request)
         if not profile.full_name or not profile.grade_number:
             return redirect('setup_profile')
-    return render(request, 'homepage.html')
+    return render(request, 'homepage.html', {'profile':profile})
 
 def setup_profile(request):
     if not request.user.is_authenticated:

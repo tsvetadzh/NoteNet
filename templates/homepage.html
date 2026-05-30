@@ -43,5 +43,13 @@
             </div>
         </div>
 
+        <div class="welcome">
+            {%if profile%}
+                <h1>Welcome, {{profile.full_name}}!</h1>
+            {%else%}
+                <h1>Welcome to NoteNet!</h1>
+            {%endif%}
+        </div>
+
     </body>
 </html>
