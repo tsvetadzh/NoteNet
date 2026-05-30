@@ -61,16 +61,20 @@
         <div class="suggestions">
             <div class="sug-box">
                 {%if profile%}
+                    <img src="{%static 'assets/sugmyclass.png'%}" class="sugimg">
                     <a href="{% url 'myclass' %}" class="text">View your class</a>
                 {%else%}
+                    <img src="{%static 'assets/sugmyclass.png'%}" class="sugimg">  
                     <a href="{% url 'materials' %}" class="text">View materials</a>
                 {%endif%}
             </div>
 
             <div class="sug-box">
                 {%if profile%}
+                    <img src="{%static 'assets/sugaddnote.png'%}" class="sugimg">
                     <a href="{% url 'addnote' %}" class="text">Add notes</a>
                 {%else%}
+                    <img src="{%static 'assets/sugaddnote.png'%}" class="sugimg">
                     <a href="{% url 'profile' %}" class="text">Create an account</a>
                 {%endif%}
             </div>
