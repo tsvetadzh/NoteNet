@@ -16,7 +16,7 @@
                 z-index: 1;
                 height: 5em;
                 background-color: rgb(118 152 201);
-                box-shadow: 0 3px 20px rgba(0, 0, 0, 0.7);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             }
 
             .left-side {
@@ -49,25 +49,6 @@
                 color: rgb(63, 63, 63);
             }
 
-            .searchbox{
-                border: none;
-                border-radius: 20px;
-                outline: none;
-                transition: 0.3s;
-                padding-left: 8em;
-                padding-right: 8em;
-                margin-right: 3em;
-                padding-top: 0.5em;
-                padding-bottom: 0.5em;
-                background-color: rgb(224, 246, 254);
-            }
-
-            .searchbox:hover{
-                background-color: rgb(224, 236, 223);
-                border-radius: 20px;
-                outline: none;
-            }
-
             #menu-toggle {
                 display: none;
             }
@@ -95,49 +76,63 @@
             }
 
             .popup-menu {
+                margin-top: 5em;
+                padding-top: 4em;
                 display: none;
-                justify-content: center;
-                position: absolute;
-                top: 3.5em;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+                position: fixed;
+                top: 0;
                 right: 0;
+                width: 14em;
                 background-color: white;
                 border-radius: 6px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                box-shadow: 4px 0 16px rgba(0,0,0,0.18);   
                 z-index: 100;
                 font-size: 1em;
             }
 
             #menu-toggle:checked ~ .popup-menu {
-                display: block;
+                display: flex;
             }
 
             .popup-menu a {
                 display: block;
-                padding-left: 4em;
-                padding-right: 4em;
-                padding-top: 1em;
-                padding-bottom: 1em;
+                padding: 1.5em 3em;
+                border: 3px;
+                border-color: rgb(0 67 105);
                 text-decoration: none;
-                box-shadow: 0 2px 2px rgba(77, 70, 70, 0.1);
-                color: black;
+                color: rgb(0 67 105);
                 white-space: nowrap;
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+                box-shadow: 0 0 1px rgba(0,0,0,0.18); 
             }
 
-            .popup-menu a:hover{
-                background-color: rgb(169, 226, 169);
+            .popup-menu a:hover {
+                background-color: rgb(185, 223, 240);
             }
 
-            .popup-menu a:first-child {
-                border-radius: 6px 6px 0 0;
+            .close-menu {
+                position: absolute;
+                top: 0.6em;
+                right: 0.8em;
+                font-size: 1.4em;
+                cursor: pointer;
+                color: rgb(0 67 105);
+                line-height: 1;
+                user-select: none;
             }
 
-            .popup-menu a:last-child {
-                border-radius: 0 0 6px 6px;
+            .close-menu:hover {
+                color: rgb(63, 63, 63);
             }
 
             .icon{
-                height: 2.1em;
-                width: 2.1em;
+                height: 2.5em;
+                width: 2.5em;
                 object-fit: cover;
                 margin-right: 2em;
                 margin-top: 0.2em;

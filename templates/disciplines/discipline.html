@@ -23,8 +23,6 @@
                 </div>
             </div>
             <div class="right-side">
-                <span class="search-icon"></span>
-                <input type="search" class="searchbox">
                 <div class="profile">
                     <a href="{% url 'profile' %}">
                         <img class="icon" src="{% static 'assets/profile.png'%}">
@@ -37,6 +35,7 @@
                     <span></span>
                 </label>
                 <div class="popup-menu">
+                    <label class="close-menu" for="menu-toggle">&#x2715;</label>
                     <a href="{% url 'homepage' %}">Homepage</a>
                     <a href="{% url 'materials' %}">Materials</a>
                     <a href="{% url 'addnote' %}">Add notes</a>

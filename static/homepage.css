@@ -20,7 +20,7 @@ body {
     width: 100%;
     height: 70vh;
     overflow: hidden;
-    box-shadow: 0 8px 40px rgba(168, 168, 168, 0.45);
+    box-shadow: 0 0px 40px rgba(139, 139, 139, 0.45);
 }
 
 .welcome-img {
@@ -28,7 +28,7 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    filter: brightness(0.67);
+    filter: brightness(0.84);
 }
 
 .welcome-text-part {
@@ -51,7 +51,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10em;
-    margin-top: 30em;
+    margin-top: 40em;
     margin-bottom: 5em;
     flex-wrap: wrap;
 }
