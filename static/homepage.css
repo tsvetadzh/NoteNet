@@ -14,3 +14,15 @@ body {
     padding-top: 5em;
     overflow-y: auto;
 }
+
+.welcome{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5em;
+}
+
+.welcome-text{
+    color: rgb(0 67 105);
+    font-size: 3em;
+}
