@@ -1,17 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My Profile — NoteNet</title>
-        <meta name="description" content="Your NoteNet profile page.">
+        <title>My Profile</title>
         <link rel="stylesheet" href="{% static 'header.css' %}">
         <link rel="stylesheet" href="{% static 'profile.css' %}">
     </head>
 
     <body>
-        <!-- ── Header ───────────────────────────── -->
         <div class="header">
             <div class="left-side">
                 <div id="logo">
@@ -46,22 +42,18 @@
             </div>
         </div>
 
-        <!-- ── Messages Notices ─────────────────── -->
         {% if messages %}
-            <div class="messages-container" style="max-width: 500px; margin: 1em auto -2em; padding: 0 1em;">
+            <div class="messages-container">
                 {% for message in messages %}
-                    <div class="alert-box {% if message.tags %}{{ message.tags }}{% endif %}" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(8px); border-radius: 12px; padding: 1em 1.2em; margin-bottom: 1em; box-shadow: 0 4px 20px rgba(0, 67, 105, 0.1); border-left: 5px solid {% if 'success' in message.tags %}#2ec4b6{% elif 'warning' in message.tags %}#ff9f1c{% else %}#004369{% endif %}; font-size: 0.95em; color: rgb(0, 67, 105);">
+                    <div class="alert-box {% if message.tags %}{{ message.tags }}{% endif %}">
                         {{ message }}
                     </div>
                 {% endfor %}
             </div>
         {% endif %}
 
-        <!-- ── Profile card ──────────────────────── -->
         <div class="profile-wrapper">
             <div class="profile-card">
-
-                <!-- Avatar: first letter of Name or Username -->
                 <div class="avatar-circle">
                     {% if profile.full_name %}
                         {{ profile.full_name|first|upper }}
@@ -75,7 +67,6 @@
                     Grade {{ profile.get_grade_display|upper }} &bull; NoteNet Student
                 </p>
 
-                <!-- Info rows -->
                 <div class="profile-info">
                     <div class="info-row">
                         <span class="info-label">Full Name</span>
@@ -83,7 +74,7 @@
                     </div>
                     <div class="info-row">
                         <span class="info-label">Grade / Class</span>
-                        <span class="info-value" style="font-weight: bold; color: rgb(0, 67, 105);">{{ profile.get_grade_display|upper }}</span>
+                        <span class="info-value info-value--grade">{{ profile.get_grade_display|upper }}</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Username</span>
@@ -101,31 +92,28 @@
                     </div>
                 </div>
 
-                <!-- Academic Advancement Tracker -->
-                <div class="progression-box" style="background: rgba(0, 67, 105, 0.05); border-radius: 14px; padding: 1.2em 1.5em; margin-bottom: 2.2em; text-align: left; border: 1px solid rgba(0, 67, 105, 0.08);">
-                    <h3 style="font-size: 1.05em; color: rgb(0, 67, 105); margin-bottom: 0.6em; font-family: inherit; display: flex; justify-content: space-between; align-items: center;">
+                <div class="progression-box">
+                    <h3>
                         <span>Academic Progression</span>
-                        <span style="font-size: 0.85em; background: rgb(0, 67, 105); color: white; padding: 0.2em 0.6em; border-radius: 20px;">365 Days Rollover</span>
+                        <span class="grade-badge">Upgrade grade</span>
                     </h3>
-                    
-                    <div class="progress-container" style="background: rgba(0, 67, 105, 0.1); height: 8px; border-radius: 4px; overflow: hidden; margin: 0.8em 0 0.5em 0; position: relative;">
-                        <div class="progress-bar" style="width: {{ progress_percentage }}%; background: linear-gradient(90deg, rgb(100, 140, 195) 0%, rgb(0, 67, 105) 100%); height: 100%; border-radius: 4px; transition: width 0.4s ease;"></div>
+
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: {{ progress_percentage }}%;"></div>
                     </div>
-                    
-                    <div style="display: flex; justify-content: space-between; font-size: 0.85em; color: rgb(100, 130, 160); font-family: 'Times New Roman', Times, serif; font-style: italic;">
+
+                    <div class="progress-dates">
                         <span>Set: {{ grade_updated_at|date:"M d, Y" }}</span>
-                        <span style="font-weight: bold; color: rgb(0, 67, 105);">{{ days_left }} days remaining</span>
+                        <span class="days-remaining">{{ days_left }} days remaining</span>
                     </div>
                 </div>
 
-                <div class="action-buttons" style="display: flex; flex-direction: column; gap: 0.8em; align-items: center;">
-                    <!-- Simulation Button for testing grade advancement -->
-                    <a href="{% url 'simulate_grade_advancement' %}" class="btn-simulate" style="display: inline-block; padding: 0.6em 1.8em; background: rgba(0, 67, 105, 0.1); color: rgb(0, 67, 105); border: 1px dashed rgb(0, 67, 105); border-radius: 8px; font-size: 0.85em; cursor: pointer; text-decoration: none; transition: all 0.2s; text-align: center; font-weight: 600; width: 80%; box-sizing: border-box;">
-                        Simulate 365 Days Pass
+                <div class="action-buttons">
+                    <a href="{% url 'simulate_grade_advancement' %}" class="btn-simulate">
+                        Upgrade Grade
                     </a>
 
-                    <!-- Logout -->
-                    <a href="{% url 'logout' %}" class="btn-logout" style="width: 80%; text-align: center; box-sizing: border-box;">Log Out</a>
+                    <a href="{% url 'logout' %}" class="btn-logout">Log Out</a>
                 </div>
 
             </div>

@@ -1,11 +1,10 @@
-p, h1, h2, em {
+p, h1, em {
     padding: 0;
     margin: 0;
 }
 
 html, body {
-    background: linear-gradient(135deg, rgb(100, 140, 195) 0%, rgb(180, 210, 230) 100%);
-    min-height: 100vh;
+    background-color: rgb(219, 233, 238);
     padding: 0;
     margin: 0;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -19,7 +18,6 @@ body {
     box-sizing: border-box;
 }
 
-/* ── Profile wrapper ────────────────────────────── */
 .profile-wrapper {
     display: flex;
     justify-content: center;
@@ -28,32 +26,23 @@ body {
     box-sizing: border-box;
 }
 
-/* ── Profile card ───────────────────────────────── */
+
 .profile-card {
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.82);
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 67, 105, 0.18), 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 32px rgba(0, 67, 105, 0.18);
     padding: 2.8em 3em;
     width: 100%;
     max-width: 500px;
     border: 1px solid rgba(255,255,255,0.6);
     text-align: center;
-    animation: slideUp 0.4s ease;
 }
 
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── Avatar ─────────────────────────────────────── */
 .avatar-circle {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    background: rgb(118, 152, 201);
+    background-color: rgb(118, 152, 201);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -65,7 +54,6 @@ body {
     letter-spacing: 0.05em;
 }
 
-/* ── Name & email ───────────────────────────────── */
 .profile-card h1 {
     color: rgb(0, 67, 105);
     font-size: 1.7em;
@@ -78,9 +66,8 @@ body {
     margin-bottom: 1.8em;
 }
 
-/* ── Info rows ──────────────────────────────────── */
 .profile-info {
-    background: rgba(219, 233, 238, 0.55);
+    background-color: rgba(219, 233, 238, 0.55);
     border-radius: 12px;
     padding: 1em 1.5em;
     margin-bottom: 2em;
@@ -110,11 +97,10 @@ body {
     color: rgb(20, 45, 70);
 }
 
-/* ── Logout button ──────────────────────────────── */
 .btn-logout {
     display: inline-block;
     padding: 0.75em 2.5em;
-    background: rgb(0, 67, 105);
+    background-color: rgb(0, 67, 105);
     color: white;
     border: none;
     border-radius: 10px;
@@ -122,28 +108,128 @@ body {
     font-family: inherit;
     cursor: pointer;
     text-decoration: none;
-    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
     letter-spacing: 0.04em;
+    width: 80%;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .btn-logout:hover {
     background: rgb(180, 30, 30);
     box-shadow: 0 4px 16px rgba(180, 30, 30, 0.25);
-    transform: translateY(-1px);
 }
 
-.btn-logout:active {
-    transform: translateY(0);
-}
-
-/* Simulate button */
 .btn-simulate:hover {
-    background: rgb(0, 67, 105) !important;
-    color: white !important;
-    border-style: solid !important;
+    background-color: rgb(0, 67, 105);
+    color: white;
+    border-style: solid;
     box-shadow: 0 4px 12px rgba(0, 67, 105, 0.2);
-    transform: translateY(-1px);
 }
-.btn-simulate:active {
-    transform: translateY(0);
+.btn-simulate {
+    display: inline-block;
+    padding: 0.6em 1.8em;
+    background-color: rgba(0, 67, 105, 0.1);
+    color: rgb(0, 67, 105);
+    border: 1px dashed rgb(0, 67, 105);
+    border-radius: 8px;
+    font-size: 0.85em;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+.messages-container {
+    max-width: 500px;
+    margin: 1em auto -2em;
+    padding: 0 1em;
+}
+
+.alert-box {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 1em 1.2em;
+    margin-bottom: 1em;
+    box-shadow: 0 4px 20px rgba(0, 67, 105, 0.1);
+    border-left: 5px solid #004369;
+    font-size: 0.95em;
+    color: rgb(0, 67, 105);
+}
+
+.alert-box.success {
+    border-left-color: #2ec4b6;
+}
+
+.alert-box.warning {
+    border-left-color: #ff9f1c;
+}
+
+.info-value--grade {
+    font-weight: bold;
+    color: rgb(0, 67, 105);
+}
+
+.progression-box {
+    background-color: rgba(0, 67, 105, 0.05);
+    border-radius: 14px;
+    padding: 1.2em 1.5em;
+    margin-bottom: 2.2em;
+    text-align: left;
+    border: 1px solid rgba(0, 67, 105, 0.08);
+}
+
+.progression-box h3 {
+    font-size: 1.05em;
+    color: rgb(0, 67, 105);
+    margin-bottom: 0.6em;
+    font-family: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grade-badge {
+    font-size: 0.85em;
+    background-color: rgb(0, 67, 105);
+    color: white;
+    padding: 0.2em 0.6em;
+    border-radius: 20px;
+}
+
+.progress-container {
+    background-color: rgba(0, 67, 105, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0.8em 0 0.5em 0;
+    position: relative;
+}
+
+.progress-bar {
+    background-color: rgb(100, 130, 160);
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+}
+
+.progress-dates {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.87em;
+    color: rgb(100, 130, 160);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.days-remaining {
+    font-weight: bold;
+    color: rgb(0, 67, 105);
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    align-items: center;
 }
