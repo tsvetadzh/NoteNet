@@ -1,17 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Log In — NoteNet</title>
-        <meta name="description" content="Log in to your NoteNet account to access your notes and class materials.">
+        <title>Log In</title>
         <link rel="stylesheet" href="{% static 'header.css' %}">
         <link rel="stylesheet" href="{% static 'auth.css' %}">
     </head>
 
     <body>
-        <!-- ── Header ───────────────────────────── -->
         <div class="header">
             <div class="left-side">
                 <div id="logo">
@@ -24,8 +20,6 @@
                 </div>
             </div>
             <div class="right-side">
-                <span class="search-icon"></span>
-                <input type="search" class="searchbox">
                 <div class="profile">
                     <a href="{% url 'profile' %}">
                         <img class="icon" src="{% static 'assets/profile.png'%}">
@@ -48,15 +42,14 @@
             </div>
         </div>
 
-        <!-- ── Login card ────────────────────────── -->
         <div class="auth-wrapper">
-            <div class="auth-card">
-                <h1>Welcome back</h1>
-                <p class="subtitle">Log in to your NoteNet account</p>
+            <div class="login-box">
+                <h1 class ="welcome">Welcome back</h1>
+                <p class="welcome-subtitle">Log in to your NoteNet account</p>
 
                 {% if messages %}
                     {% for message in messages %}
-                        <div class="error-msg">{{ message }}</div>
+                        <div class="error-message">{{ message }}</div>
                     {% endfor %}
                 {% endif %}
 
@@ -64,33 +57,29 @@
                     {% csrf_token %}
 
                     <div class="form-group">
-                        <label for="login-username">Username</label>
+                        <p class="subtitle">Username</p>
                         <input
                             type="text"
                             id="login-username"
                             name="username"
                             placeholder="Enter your username"
-                            autocomplete="username"
-                            required
                         >
                     </div>
 
                     <div class="form-group">
-                        <label for="login-password">Password</label>
+                        <label class="subtitle">Password</label>
                         <input
                             type="password"
                             id="login-password"
                             name="password"
                             placeholder="Enter your password"
-                            autocomplete="current-password"
-                            required
                         >
                     </div>
 
-                    <button type="submit" class="btn-submit">Log In</button>
+                    <button type="submit" class="button-submit">Log In</button>
                 </form>
 
-                <p class="auth-switch">
+                <p class="switch">
                     Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
                 </p>
             </div>
