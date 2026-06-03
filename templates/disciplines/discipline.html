@@ -74,18 +74,43 @@
             <div class="materials-grid">
                 {% if materials %}
                     {% for mat in materials %}
-                        <div class="material-card">
+                        <!-- Clickable card opens detail modal -->
+                        <div class="material-card" onclick="openDetailModal({{ mat.id }})">
+                            <div class="material-card-click-hint">Click to view</div>
                             <div class="material-preview-box">
-                                {% with filename=mat.file.name|lower %}
-                                    {% if ".png" in filename or ".jpg" in filename or ".jpeg" in filename or ".gif" in filename or ".webp" in filename %}
-                                        <img src="{{ mat.file.url }}" class="material-img-preview" alt="Attached Material">
-                                    {% else %}
-                                        <div class="material-file-icon">
-                                            📄
-                                            <span class="material-file-ext">file</span>
+                                <div class="material-slides-container">
+                                    {% for mat_file in mat.files.all %}
+                                        <div class="material-slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}">
+                                            {% if mat_file.is_image %}
+                                                <div class="image-container">
+                                                    <img src="{{ mat_file.file.url }}" class="material-img-preview" alt="Attached Material">
+                                                    <div class="photo-date-badge">{{ mat.uploaded_at|date:"Y-m-d" }}</div>
+                                                </div>
+                                            {% else %}
+                                                <div class="material-file-icon">
+                                                    <span class="material-file-ext">{{ mat_file.display_name|slice:"-4:"|cut:"." }}</span>
+                                                </div>
+                                                <div class="photo-date-badge">{{ mat.uploaded_at|date:"Y-m-d" }}</div>
+                                            {% endif %}
+                                            
+                                            <!-- Slide Hover Download Overlay -->
+                                            <div class="slide-overlay-btn">
+                                                <a href="{{ mat_file.file.url }}" download class="btn-download-slide" title="Download this file" onclick="event.stopPropagation()">Download</a>
+                                            </div>
                                         </div>
-                                    {% endif %}
-                                {% endwith %}
+                                    {% endfor %}
+                                </div>
+                                {% if mat.files.count > 1 %}
+                                    <!-- Carousel Controls -->
+                                    <button class="slide-ctrl prev-btn" onclick="event.stopPropagation(); changeSlide(this, -1)">&#10094;</button>
+                                    <button class="slide-ctrl next-btn" onclick="event.stopPropagation(); changeSlide(this, 1)">&#10095;</button>
+                                    <!-- Slide Indicators -->
+                                    <div class="slide-dots">
+                                        {% for mat_file in mat.files.all %}
+                                            <span class="dot {% if forloop.first %}active{% endif %}" onclick="event.stopPropagation(); setSlide(this, {{ forloop.counter0 }})"></span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
                             <div class="material-content">
                                 <div class="material-desc">
@@ -98,14 +123,45 @@
                                     <div class="meta-date">
                                         {{ mat.uploaded_at|date:"M j, Y, g:i A" }}
                                     </div>
-                                    <a href="{{ mat.file.url }}" download class="btn-download-file">Download File</a>
+                                </div>
+                                
+                                <div class="material-files-list">
+                                    <p style="margin: 0 0 0.5em 0; font-weight: bold; font-size: 0.85em; color: rgb(0, 67, 105);">Attached Files:</p>
+                                    {% for mat_file in mat.files.all %}
+                                        <a href="{{ mat_file.file.url }}" download class="file-download-item" onclick="event.stopPropagation()">
+                                            <span>{{ mat_file.display_name }}</span>
+                                            <span style="font-size: 0.85em; opacity: 0.8; font-weight: bold;">Download</span>
+                                        </a>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Hidden data store for detail modal -->
+                        <script id="mat-data-{{ mat.id }}" type="application/json">
+                        {
+                            "id": {{ mat.id }},
+                            "description": "{{ mat.description|default:""|escapejs }}",
+                            "uploader": "{{ mat.uploaded_by.profile.full_name|default:mat.uploaded_by.username|escapejs }} ({{ mat.grade }}{{ mat.section|upper }})",
+                            "uploaded_at": "{{ mat.uploaded_at|date:'M j, Y, g:i A' }}",
+                            "date": "{{ mat.uploaded_at|date:'Y-m-d' }}",
+                            "files": [
+                                {% for mat_file in mat.files.all %}
+                                {
+                                    "url": "{{ mat_file.file.url }}",
+                                    "name": "{{ mat_file.display_name|escapejs }}",
+                                    "is_image": {% if mat_file.is_image %}true{% else %}false{% endif %}
+                                }{% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                            ]
+                        }
+                        </script>
+
+
                     {% endfor %}
                 {% else %}
                     <div class="empty-state">
-                        <span class="empty-state-icon">📂</span>
+                                    <span class="empty-state-icon"></span>
                         <div class="empty-state-title">No Materials Yet</div>
                         <p class="empty-state-desc">No notes or images have been posted for Class {{ grade }}{{ selected_section|upper }} in {{ subject_name }}. Click the floating button below to be the first to share!</p>
                     </div>
@@ -115,6 +171,33 @@
 
         <!-- ── Floating Add Button ──────────────── -->
         <button id="open-upload-btn" class="floating-add-btn">+</button>
+
+        <!-- ── Material Detail Modal ──────────────── -->
+        <div id="detail-modal" class="modal-overlay detail-modal-overlay">
+            <div class="detail-modal-card">
+                <button id="close-detail-btn" class="close-modal-btn">&#x2715;</button>
+
+                <!-- Left: Large Preview Carousel -->
+                <div class="detail-preview-side">
+                    <div id="detail-slides" class="detail-slides-container"></div>
+                    <button class="slide-ctrl prev-btn detail-prev" onclick="detailChangeSlide(-1)">&#10094;</button>
+                    <button class="slide-ctrl next-btn detail-next" onclick="detailChangeSlide(1)">&#10095;</button>
+                    <div id="detail-dots" class="slide-dots"></div>
+                </div>
+
+                <!-- Right: Info Panel -->
+                <div class="detail-info-side">
+                    <div class="detail-date-badge"><span id="detail-date"></span></div>
+                    <h3 id="detail-uploader" class="detail-uploader"></h3>
+                    <p id="detail-uploaded-at" class="detail-uploaded-at"></p>
+                    <div id="detail-description" class="detail-description"></div>
+                    <div class="detail-files-list">
+                        <p class="detail-files-label">Attached Files</p>
+                        <div id="detail-files"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- ── Drag & Drop Upload Modal ─────────── -->
         <div id="upload-modal" class="modal-overlay">
@@ -144,18 +227,17 @@
 
                     <!-- Premium Drag & Drop Area -->
                     <div class="form-group">
-                        <label>Attachment File</label>
+                        <label>Attachment Files</label>
                         <div id="dropzone" class="dropzone">
-                            <div id="dropzone-content-wrapper" class="dropzone-content">
-                                <span class="upload-icon">📁</span>
-                                <p class="dropzone-text">Drag & drop your file here or <span class="browse-link">browse</span></p>
-                                <input type="file" id="file-input" name="file" style="display: none;" required>
+                                <div id="dropzone-content-wrapper" class="dropzone-content">
+                                <span class="upload-icon"></span>
+                                <p class="dropzone-text">Drag & drop your files here or <span class="browse-link">browse</span></p>
                             </div>
-                            <div id="file-preview" class="file-preview" style="display: none;">
-                                <span id="preview-icon" class="preview-icon">📄</span>
-                                <span id="preview-name" class="preview-name">filename.pdf</span>
-                                <button type="button" id="remove-file-btn" class="remove-file-btn">&times;</button>
+                            <!-- Programmatic Multiple Files Previews -->
+                            <div id="files-preview-container" class="files-preview-container" style="display: none;">
+                                <!-- Files will be dynamically rendered here -->
                             </div>
+                            <input type="file" id="file-input" name="files" style="display: none;" multiple>
                         </div>
                     </div>
 
@@ -168,16 +250,13 @@
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const openBtn = document.getElementById('open-upload-btn');
+
                 const closeBtn = document.getElementById('close-upload-btn');
                 const modal = document.getElementById('upload-modal');
                 const form = document.getElementById('upload-form');
                 const dropzone = document.getElementById('dropzone');
                 const fileInput = document.getElementById('file-input');
                 const contentWrapper = document.getElementById('dropzone-content-wrapper');
-                const previewWrapper = document.getElementById('file-preview');
-                const previewName = document.getElementById('preview-name');
-                const previewIcon = document.getElementById('preview-icon');
-                const removeBtn = document.getElementById('remove-file-btn');
                 const submitBtn = document.getElementById('submit-btn');
 
                 // --- Modal Control ---
@@ -195,15 +274,20 @@
                     resetForm();
                 }
 
+                // --- Multiple Files Management ---
+                let selectedFiles = [];
+                const container = document.getElementById('files-preview-container');
+
                 function resetForm() {
                     form.reset();
-                    clearFile();
+                    selectedFiles = [];
+                    renderPreviews();
                 }
 
                 // --- Drag & Drop Core Handlers ---
                 const triggerFileInput = (e) => {
                     // Prevent trigger if clicking on remove button
-                    if (e.target.closest('#remove-file-btn')) return;
+                    if (e.target.closest('.remove-file-btn')) return;
                     fileInput.click();
                 };
 
@@ -230,61 +314,82 @@
                 dropzone.addEventListener('drop', (e) => {
                     const dt = e.dataTransfer;
                     const files = dt.files;
-
                     if (files.length > 0) {
-                        fileInput.files = files;
-                        handleFileSelection(files[0]);
+                        handleFilesAdded(files);
                     }
                 });
 
                 // Input selection Handler
                 fileInput.addEventListener('change', (e) => {
                     if (fileInput.files.length > 0) {
-                        handleFileSelection(fileInput.files[0]);
+                        handleFilesAdded(fileInput.files);
                     }
                 });
 
-                // Remove File Button
-                removeBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    clearFile();
-                });
-
-                // Display selected file details in preview
-                function handleFileSelection(file) {
-                    previewName.textContent = file.name;
-                    
-                    // Determine preview icon based on extension
-                    const ext = file.name.split('.').pop().toLowerCase();
-                    const images = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-                    if (images.includes(ext)) {
-                        previewIcon.textContent = '🖼️';
-                    } else if (ext === 'pdf') {
-                        previewIcon.textContent = '📕';
-                    } else if (['zip', 'rar', 'tar', 'gz'].includes(ext)) {
-                        previewIcon.textContent = '📦';
-                    } else if (['doc', 'docx'].includes(ext)) {
-                        previewIcon.textContent = '📘';
-                    } else {
-                        previewIcon.textContent = '📄';
+                function handleFilesAdded(newFiles) {
+                    for (let i = 0; i < newFiles.length; i++) {
+                        const exists = selectedFiles.some(f => f.name === newFiles[i].name && f.size === newFiles[i].size);
+                        if (!exists) {
+                            selectedFiles.push(newFiles[i]);
+                        }
                     }
-
-                    contentWrapper.style.display = 'none';
-                    previewWrapper.style.display = 'flex';
+                    renderPreviews();
                 }
 
-                function clearFile() {
-                    fileInput.value = '';
-                    contentWrapper.style.display = 'flex';
-                    previewWrapper.style.display = 'none';
+                function renderPreviews() {
+                    container.innerHTML = '';
+                    
+                    if (selectedFiles.length === 0) {
+                        contentWrapper.style.display = 'flex';
+                        container.style.display = 'none';
+                        return;
+                    }
+                    
+                    contentWrapper.style.display = 'none';
+                    container.style.display = 'grid';
+                    
+                    selectedFiles.forEach((file, index) => {
+                        const fileItem = document.createElement('div');
+                        fileItem.className = 'file-preview-item';
+                        
+                        let icon = '';
+                        const ext = file.name.split('.').pop().toLowerCase();
+                        const images = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                        if (images.includes(ext)) {
+                            icon = '';
+                        } else if (ext === 'pdf') {
+                            icon = '';
+                        } else if (['zip', 'rar', 'tar', 'gz'].includes(ext)) {
+                            icon = '';
+                        } else if (['doc', 'docx'].includes(ext)) {
+                            icon = '';
+                        }
+                        
+                        fileItem.innerHTML = `
+                            <span class="preview-icon">${icon}</span>
+                            <span class="preview-name" title="${file.name}">${file.name}</span>
+                            <button type="button" class="remove-file-btn" data-index="${index}">&times;</button>
+                        `;
+                        container.appendChild(fileItem);
+                    });
+                    
+                    // Add click event for remove buttons
+                    container.querySelectorAll('.remove-file-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const index = parseInt(btn.getAttribute('data-index'), 10);
+                            selectedFiles.splice(index, 1);
+                            renderPreviews();
+                        });
+                    });
                 }
 
                 // --- AJAX Submit ---
                 form.addEventListener('submit', (e) => {
                     e.preventDefault();
                     
-                    if (!fileInput.files[0]) {
-                        alert('Please select or drag in a file.');
+                    if (selectedFiles.length === 0) {
+                        alert('Please select or drag in at least one file.');
                         return;
                     }
 
@@ -292,6 +397,15 @@
                     submitBtn.textContent = 'Uploading Material...';
 
                     const formData = new FormData(form);
+                    
+                    // Clear out default file fields
+                    formData.delete('file');
+                    formData.delete('files');
+                    
+                    // Append multiple files
+                    selectedFiles.forEach(file => {
+                        formData.append('files', file);
+                    });
 
                     fetch(form.action, {
                         method: 'POST',
@@ -303,7 +417,6 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            // Close modal and reload page to see correctly sorted materials list
                             modal.classList.remove('active');
                             window.location.reload();
                         } else {
@@ -320,6 +433,132 @@
                     });
                 });
             });
+
+            // --- Carousel Navigation Logic ---
+            window.changeSlide = function(btn, direction) {
+                const previewBox = btn.closest('.material-preview-box');
+                const slides = previewBox.querySelectorAll('.material-slide');
+                const dots = previewBox.querySelectorAll('.dot');
+                if (slides.length <= 1) return;
+                
+                let activeIndex = -1;
+                slides.forEach((slide, i) => {
+                    if (slide.classList.contains('active')) {
+                        activeIndex = i;
+                    }
+                });
+                
+                if (activeIndex === -1) return;
+                
+                slides[activeIndex].classList.remove('active');
+                if (dots.length > activeIndex) dots[activeIndex].classList.remove('active');
+                
+                let newIndex = activeIndex + direction;
+                if (newIndex >= slides.length) {
+                    newIndex = 0;
+                } else if (newIndex < 0) {
+                    newIndex = slides.length - 1;
+                }
+                
+                slides[newIndex].classList.add('active');
+                if (dots.length > newIndex) dots[newIndex].classList.add('active');
+            };
+
+            window.setSlide = function(dot, targetIndex) {
+                const previewBox = dot.closest('.material-preview-box');
+                const slides = previewBox.querySelectorAll('.material-slide');
+                const dots = previewBox.querySelectorAll('.dot');
+                
+                slides.forEach(s => s.classList.remove('active'));
+                dots.forEach(d => d.classList.remove('active'));
+                
+                slides[targetIndex].classList.add('active');
+                dots[targetIndex].classList.add('active');
+            };
+
+
+            // --- Detail Modal Logic ---
+            const detailModal = document.getElementById('detail-modal');
+            const closeDetailBtn = document.getElementById('close-detail-btn');
+            let detailFiles = [];
+            let detailIndex = 0;
+
+            window.openDetailModal = function(matId) {
+                const dataEl = document.getElementById('mat-data-' + matId);
+                if (!dataEl) return;
+                const data = JSON.parse(dataEl.textContent);
+                detailFiles = data.files;
+                detailIndex = 0;
+
+                // Populate info
+                document.getElementById('detail-date').textContent = data.date;
+                document.getElementById('detail-uploader').textContent = 'By ' + data.uploader;
+                document.getElementById('detail-uploaded-at').textContent = data.uploaded_at;
+                document.getElementById('detail-description').innerHTML = (data.description || 'No description provided.').replace(/\n/g, '<br>');
+
+                // Populate files list
+                const filesDiv = document.getElementById('detail-files');
+                filesDiv.innerHTML = '';
+                data.files.forEach(f => {
+                    const a = document.createElement('a');
+                    a.href = f.url;
+                    a.download = f.name;
+                    a.className = 'file-download-item';
+                    a.innerHTML = `<span>${f.name}</span><span style="font-size:0.85em;opacity:0.8;font-weight:bold">Download</span>`;
+                    filesDiv.appendChild(a);
+                });
+
+                renderDetailSlides();
+                detailModal.classList.add('active');
+            };
+
+            function renderDetailSlides() {
+                const slidesContainer = document.getElementById('detail-slides');
+                const dotsContainer = document.getElementById('detail-dots');
+                slidesContainer.innerHTML = '';
+                dotsContainer.innerHTML = '';
+
+                detailFiles.forEach((f, i) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'detail-slide' + (i === detailIndex ? ' active' : '');
+
+                    if (f.is_image) {
+                        slide.innerHTML = `<img src="${f.url}" class="detail-img" alt="${f.name}">`;
+                    } else {
+                        const ext = f.name.split('.').pop().toUpperCase();
+                        let icon = '';
+                        if (['pdf'].includes(ext.toLowerCase())) icon = '';
+                        else if (['zip','rar','gz','tar'].includes(ext.toLowerCase())) icon = '';
+                        else if (['doc','docx'].includes(ext.toLowerCase())) icon = '';
+                        slide.innerHTML = `<div class="detail-file-icon">${icon}<span class="detail-file-ext">${ext}</span><span class="detail-file-name">${f.name}</span></div>`;
+                    }
+                    slidesContainer.appendChild(slide);
+
+                    if (detailFiles.length > 1) {
+                        const dot = document.createElement('span');
+                        dot.className = 'dot' + (i === detailIndex ? ' active' : '');
+                        dot.onclick = () => { detailIndex = i; renderDetailSlides(); };
+                        dotsContainer.appendChild(dot);
+                    }
+                });
+
+                // Show/hide nav buttons
+                const prevBtn = document.querySelector('.detail-prev');
+                const nextBtn = document.querySelector('.detail-next');
+                if (prevBtn) prevBtn.style.display = detailFiles.length > 1 ? 'flex' : 'none';
+                if (nextBtn) nextBtn.style.display = detailFiles.length > 1 ? 'flex' : 'none';
+            }
+
+            window.detailChangeSlide = function(dir) {
+                detailIndex = (detailIndex + dir + detailFiles.length) % detailFiles.length;
+                renderDetailSlides();
+            };
+
+            closeDetailBtn.addEventListener('click', () => detailModal.classList.remove('active'));
+            detailModal.addEventListener('click', (e) => {
+                if (e.target === detailModal) detailModal.classList.remove('active');
+            });
+
         </script>
     </body>
 </html>

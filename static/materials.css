@@ -78,7 +78,7 @@ body {
 }
 
 .grade.locked::before {
-    content: "🔒 Locked";
+    content: "Locked";
     position: absolute;
     top: 15px;
     right: 15px;
@@ -100,7 +100,7 @@ body {
 }
 
 .grade.active-grade::before {
-    content: "⭐ Your Grade";
+    content: "Your Grade";
     position: absolute;
     top: 15px;
     right: 15px;

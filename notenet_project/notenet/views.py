@@ -6,7 +6,7 @@ from django.http import Http404, JsonResponse
 from django.utils import timezone
 import datetime
 import re
-from .models import UserProfile, Material
+from .models import UserProfile, Material, MaterialFile
 
 
 SUBJECTS = {
@@ -201,7 +201,7 @@ def check_profile(request):
         return None
     profile, _ = UserProfile.objects.get_or_create(user=request.user)
     if profile.check_and_update_grade():
-        messages.success(request, f"🎉 Congratulations! You have automatically advanced to Grade {profile.get_grade_display()}!")
+        messages.success(request, f"Congratulations! You have automatically advanced to Grade {profile.get_grade_display()}!")
     return profile
 
 def parse_grade(grade_str):
@@ -215,11 +215,13 @@ def parse_grade(grade_str):
     return None
 
 def homepage(request):
+    profile = None
     if request.user.is_authenticated:
         profile = check_profile(request)
         if not profile.full_name or not profile.grade_number:
             return redirect('setup_profile')
-    return render(request, 'homepage.html', {'profile':profile})
+    return render(request, 'homepage.html', {'profile': profile})
+
 
 def setup_profile(request):
     if not request.user.is_authenticated:
@@ -261,7 +263,7 @@ def simulate_grade_advancement(request):
     
     # Check if the rollover triggers
     if profile.check_and_update_grade():
-        messages.success(request, f"✨ [SIMULATION] 365 Days passed! Automatically advanced to Grade {profile.get_grade_display()}!")
+        messages.success(request, f"[SIMULATION] 365 Days passed! Automatically advanced to Grade {profile.get_grade_display()}!")
     else:
         messages.warning(request, "[SIMULATION] Date shifted back 365 days, but rollover did not trigger (already capped at 12?).")
         
@@ -276,12 +278,12 @@ def upload_material(request, grade, subject):
         return JsonResponse({'success': False, 'error': 'Access Denied'}, status=403)
         
     if request.method == 'POST':
-        file = request.FILES.get('file')
+        files = request.FILES.getlist('files')
         description = request.POST.get('description', '').strip()
         section = request.POST.get('section', profile.grade_letter).strip().lower()
         
-        if not file:
-            return JsonResponse({'success': False, 'error': 'No file uploaded.'}, status=400)
+        if not files:
+            return JsonResponse({'success': False, 'error': 'No files uploaded.'}, status=400)
             
         # Create Material
         material = Material.objects.create(
@@ -289,25 +291,20 @@ def upload_material(request, grade, subject):
             section=section,
             subject=subject,
             description=description,
-            file=file,
             uploaded_by=request.user
         )
         
+        # Save each file associated with this material
+        for f in files:
+            MaterialFile.objects.create(material=material, file=f)
+        
         return JsonResponse({
             'success': True,
-            'message': 'Material uploaded successfully!',
-            'material': {
-                'id': material.id,
-                'description': material.description,
-                'file_url': material.file.url,
-                'file_name': material.file.name.split('/')[-1],
-                'uploaded_by': material.uploaded_by.username,
-                'uploaded_at': material.uploaded_at.strftime('%b %d, %Y, %I:%M %p'),
-                'section': material.section
-            }
+            'message': 'Material uploaded successfully!'
         })
         
     return JsonResponse({'success': False, 'error': 'Invalid request method.'}, status=400)
+
 
 def addnote(request):
     if not request.user.is_authenticated:
