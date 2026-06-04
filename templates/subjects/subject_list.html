@@ -34,7 +34,12 @@
         <div class="subjects-grid">
             {% for subj in subjects %}
             <div class="subject-box">
-                <a class="subject-text" href="{% url 'discipline' grade=grade subject=subj.slug %}">{{ subj.name }}</a>
+                <a class="subject-link" href="{% url 'discipline' grade=grade subject=subj.slug %}">
+                    <div class="subject-img-box">
+                        <img src="{% static 'assets/disciplines/' %}{{ subj.slug }}.png" alt="{{ subj.name }}" class="subject-img" onerror="this.style.display='none'">
+                    </div>
+                    <span class="subject-text">{{ subj.name }}</span>
+                </a>
             </div>
             {% endfor %}
         </div>

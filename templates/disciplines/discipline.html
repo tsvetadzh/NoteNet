@@ -10,7 +10,6 @@
     </head>
 
     <body>
-        <!-- ── Header ───────────────────────────── -->
         <div class="header">
             <div class="left-side">
                 <div id="logo">
@@ -56,12 +55,10 @@
             </div>
         {% endif %}
 
-        <!-- ── Page Main Content ────────────────── -->
         <div class="container" style="margin-top: 2em;">
             <h1 class="discipline-title">{{ subject_name }}</h1>
             <p class="discipline-subtitle">Grade {{ grade }} &bull; Class Materials Repository</p>
 
-            <!-- Section Tab Bar -->
             <div class="sections-tab-bar">
                 {% for sec in sections %}
                     <a href="?section={{ sec }}" class="tab-item {% if sec == selected_section %}active{% endif %}">
@@ -70,11 +67,9 @@
                 {% endfor %}
             </div>
 
-            <!-- Materials Grid -->
             <div class="materials-grid">
                 {% if materials %}
                     {% for mat in materials %}
-                        <!-- Clickable card opens detail modal -->
                         <div class="material-card" onclick="openDetailModal({{ mat.id }})">
                             <div class="material-card-click-hint">Click to view</div>
                             <div class="material-preview-box">
@@ -101,10 +96,8 @@
                                     {% endfor %}
                                 </div>
                                 {% if mat.files.count > 1 %}
-                                    <!-- Carousel Controls -->
                                     <button class="slide-ctrl prev-btn" onclick="event.stopPropagation(); changeSlide(this, -1)">&#10094;</button>
                                     <button class="slide-ctrl next-btn" onclick="event.stopPropagation(); changeSlide(this, 1)">&#10095;</button>
-                                    <!-- Slide Indicators -->
                                     <div class="slide-dots">
                                         {% for mat_file in mat.files.all %}
                                             <span class="dot {% if forloop.first %}active{% endif %}" onclick="event.stopPropagation(); setSlide(this, {{ forloop.counter0 }})"></span>
@@ -137,7 +130,6 @@
                             </div>
                         </div>
 
-                        <!-- Hidden data store for detail modal -->
                         <script id="mat-data-{{ mat.id }}" type="application/json">
                         {
                             "id": {{ mat.id }},
@@ -169,15 +161,12 @@
             </div>
         </div>
 
-        <!-- ── Floating Add Button ──────────────── -->
         <button id="open-upload-btn" class="floating-add-btn">+</button>
 
-        <!-- ── Material Detail Modal ──────────────── -->
         <div id="detail-modal" class="modal-overlay detail-modal-overlay">
             <div class="detail-modal-card">
                 <button id="close-detail-btn" class="close-modal-btn">&#x2715;</button>
 
-                <!-- Left: Large Preview Carousel -->
                 <div class="detail-preview-side">
                     <div id="detail-slides" class="detail-slides-container"></div>
                     <button class="slide-ctrl prev-btn detail-prev" onclick="detailChangeSlide(-1)">&#10094;</button>
@@ -185,7 +174,6 @@
                     <div id="detail-dots" class="slide-dots"></div>
                 </div>
 
-                <!-- Right: Info Panel -->
                 <div class="detail-info-side">
                     <div class="detail-date-badge"><span id="detail-date"></span></div>
                     <h3 id="detail-uploader" class="detail-uploader"></h3>
@@ -199,7 +187,6 @@
             </div>
         </div>
 
-        <!-- ── Drag & Drop Upload Modal ─────────── -->
         <div id="upload-modal" class="modal-overlay">
             <div class="modal-card">
                 <button id="close-upload-btn" class="close-modal-btn">&times;</button>
@@ -225,7 +212,6 @@
                         <textarea id="upload-desc" name="description" class="form-textarea" placeholder="Add a description of what is attached..." required></textarea>
                     </div>
 
-                    <!-- Premium Drag & Drop Area -->
                     <div class="form-group">
                         <label>Attachment Files</label>
                         <div id="dropzone" class="dropzone">
@@ -398,11 +384,9 @@
 
                     const formData = new FormData(form);
                     
-                    // Clear out default file fields
                     formData.delete('file');
                     formData.delete('files');
                     
-                    // Append multiple files
                     selectedFiles.forEach(file => {
                         formData.append('files', file);
                     });
@@ -434,7 +418,6 @@
                 });
             });
 
-            // --- Carousel Navigation Logic ---
             window.changeSlide = function(btn, direction) {
                 const previewBox = btn.closest('.material-preview-box');
                 const slides = previewBox.querySelectorAll('.material-slide');
@@ -476,8 +459,6 @@
                 dots[targetIndex].classList.add('active');
             };
 
-
-            // --- Detail Modal Logic ---
             const detailModal = document.getElementById('detail-modal');
             const closeDetailBtn = document.getElementById('close-detail-btn');
             let detailFiles = [];
@@ -490,7 +471,6 @@
                 detailFiles = data.files;
                 detailIndex = 0;
 
-                // Populate info
                 document.getElementById('detail-date').textContent = data.date;
                 document.getElementById('detail-uploader').textContent = 'By ' + data.uploader;
                 document.getElementById('detail-uploaded-at').textContent = data.uploaded_at;
@@ -542,7 +522,6 @@
                     }
                 });
 
-                // Show/hide nav buttons
                 const prevBtn = document.querySelector('.detail-prev');
                 const nextBtn = document.querySelector('.detail-next');
                 if (prevBtn) prevBtn.style.display = detailFiles.length > 1 ? 'flex' : 'none';
