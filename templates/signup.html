@@ -1,17 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sign Up — NoteNet</title>
-        <meta name="description" content="Create a NoteNet account to start sharing and accessing class notes.">
         <link rel="stylesheet" href="{% static 'header.css' %}">
         <link rel="stylesheet" href="{% static 'auth.css' %}">
     </head>
 
     <body>
-        <!-- ── Header ───────────────────────────── -->
         <div class="header">
             <div class="left-side">
                 <div id="logo">
@@ -45,23 +41,14 @@
             </div>
         </div>
 
-        <!-- ── Signup card ───────────────────────── -->
         <div class="auth-wrapper">
-            <div class="auth-card">
-                <h1>Create account</h1>
-                <p class="subtitle">Join NoteNet and start sharing notes</p>
-
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="error-msg">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
-
+            <div class="login-box">
+                <h1 class="welcome">Create account</h1>
                 <form method="post" action="{% url 'signup' %}">
                     {% csrf_token %}
 
                     <div class="form-group">
-                        <label for="signup-username">Username</label>
+                        <label for="signup-username" class="form-tittle">Username</label>
                         <input
                             type="text"
                             id="signup-username"
@@ -73,7 +60,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="signup-email">Email <span style="font-weight:normal; color:#aaa;">(optional)</span></label>
+                        <label for="signup-email" class="form-tittle">Email <span style="font-weight:normal; color:#aaa;">(optional)</span></label>
                         <input
                             type="email"
                             id="signup-email"
@@ -84,7 +71,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="signup-password1">Password</label>
+                        <label for="signup-password1" class="form-tittle">Password</label>
                         <input
                             type="password"
                             id="signup-password1"
@@ -96,7 +83,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="signup-password2">Confirm Password</label>
+                        <label for="signup-password2" class="form-tittle">Confirm Password</label>
                         <input
                             type="password"
                             id="signup-password2"
@@ -107,10 +94,10 @@
                         >
                     </div>
 
-                    <button type="submit" class="btn-submit">Sign Up</button>
+                    <button type="submit" class="button-submit">Sign Up</button>
                 </form>
 
-                <p class="auth-switch">
+                <p class="switch">
                     Already have an account? <a href="{% url 'login' %}">Log in</a>
                 </p>
             </div>

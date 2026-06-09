@@ -44,14 +44,6 @@
         <div class="auth-wrapper">
             <div class="login-box">
                 <h1 class ="welcome">Welcome back</h1>
-                <p class="welcome-subtitle">Log in to your NoteNet account</p>
-
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="error-message">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
-
                 <form method="post" action="{% url 'login' %}">
                     {% csrf_token %}
 
