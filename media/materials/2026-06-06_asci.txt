@@ -1,0 +1,15 @@
+#include<stdio.h>
+char max_asci(char *str){
+    if(str == '\0') return '\0';
+    char maxLetter = str[0];
+    for(int i = 1; str[i] != '\0'; i++){
+        if(str[i] > maxLetter) maxLetter = str[i];
+    }
+    return maxLetter;
+}
+
+void main(){
+    char name[] = "Tsveta";
+    char letter = max_asci(name);
+    if(letter != '\0') printf("Answer: %c\n", letter);
+}

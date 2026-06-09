@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{{ subject_name }} — NoteNet</title>
+        <title>{{ subject_name }}</title>
         <link rel="stylesheet" href="{% static 'header.css' %}">
         <link rel="stylesheet" href="{% static 'discipline.css' %}">
     </head>
@@ -37,7 +37,6 @@
                     <label class="close-menu" for="menu-toggle">&#x2715;</label>
                     <a href="{% url 'homepage' %}">Homepage</a>
                     <a href="{% url 'materials' %}">Materials</a>
-                    <a href="{% url 'addnote' %}">Add notes</a>
                     <a href="{% url 'myclass' %}">My class</a>
                     <a href="{% url 'profile' %}">My profile</a>
                 </div>
