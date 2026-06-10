@@ -1,0 +1,4 @@
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "notenet_project.settings"
+pythonpath = ["src"]
+testpaths = ["tests"]
