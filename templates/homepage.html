@@ -63,6 +63,16 @@
                 {%endif%}
             </div>
 
+            <div class="sug-box">
+                {%if profile%}
+                    <img src="{%static 'assets/sugmyclass.png'%}" class="sugimg">
+                    <a href="{% url 'profile' %}" class="text">View your profile</a>
+                {%else%}
+                    <img src="{%static 'assets/sugaddnote.png'%}" class="sugimg">  
+                    <a href="{% url 'signup' %}" class="text">Create an account</a>
+                {%endif%}
+            </div>
+
         </div>
 
     </body>
