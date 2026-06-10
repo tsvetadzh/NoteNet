@@ -69,8 +69,7 @@
             <div class="materials-grid">
                 {% if materials %}
                     {% for mat in materials %}
-                        <div class="material-card" onclick="openDetailModal({{ mat.id }})">
-                            <div class="material-card-click-hint">Click to view</div>
+                        <div class="material-card">
                             <div class="material-preview-box">
                                 <div class="material-slides-container">
                                     {% for mat_file in mat.files.all %}
@@ -162,7 +161,8 @@
 
         <button id="open-upload-btn" class="floating-add-btn">+</button>
 
-        <div id="detail-modal" class="modal-overlay detail-modal-overlay">
+        <!-- Detail modal disabled -->
+        <div id="detail-modal" class="modal-overlay detail-modal-overlay" style="display: none;">
             <div class="detail-modal-card">
                 <button id="close-detail-btn" class="close-modal-btn">&#x2715;</button>
 
@@ -458,6 +458,8 @@
                 dots[targetIndex].classList.add('active');
             };
 
+            // Detail modal functionality disabled
+            /*
             const detailModal = document.getElementById('detail-modal');
             const closeDetailBtn = document.getElementById('close-detail-btn');
             let detailFiles = [];
@@ -536,6 +538,7 @@
             detailModal.addEventListener('click', (e) => {
                 if (e.target === detailModal) detailModal.classList.remove('active');
             });
+            */
 
         </script>
     </body>
