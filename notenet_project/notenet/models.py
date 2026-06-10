@@ -1,12 +1,18 @@
-from django.db import models
-from django.contrib.auth.models import User
-from django.utils import timezone
+from __future__ import annotations
+
+from typing import Optional
 import datetime
 import os
 
-def material_file_upload_path(instance, filename):
+from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
+
+
+def material_file_upload_path(instance: MaterialFile, filename: str) -> str:
     date_str = timezone.now().strftime('%Y-%m-%d')
     return f"materials/{date_str}_{filename}"
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -15,31 +21,28 @@ class UserProfile(models.Model):
     grade_letter = models.CharField(max_length=10, blank=True)  # 'a', 'b', 'c', 'd', etc.
     grade_updated_at = models.DateTimeField(default=timezone.now)
 
-    def get_grade_display(self):
+    def get_grade_display(self) -> str:
         if self.grade_number and self.grade_letter:
             return f"{self.grade_number}{self.grade_letter}"
         return ""
 
-    def check_and_update_grade(self):
-        # Check if 365 days have passed since grade_updated_at
+    def check_and_update_grade(self) -> bool:
         now = timezone.now()
         delta = now - self.grade_updated_at
         if delta.days >= 365:
-            # How many periods of 365 days have passed
             years_passed = delta.days // 365
             if years_passed > 0:
                 if self.grade_number:
                     new_grade = self.grade_number + years_passed
                     if new_grade > 12:
-                        new_grade = 12  # cap at 12
+                        new_grade = 12
                     self.grade_number = new_grade
-                    # Update grade_updated_at by adding the exact number of years
                     self.grade_updated_at = self.grade_updated_at + datetime.timedelta(days=365 * years_passed)
                     self.save()
                     return True
         return False
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.user.username}'s Profile ({self.get_grade_display() or 'No Grade'})"
 
 
@@ -55,7 +58,7 @@ class Material(models.Model):
     class Meta:
         ordering = ['-uploaded_at']
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.subject} ({self.grade}{self.section}) - {self.description[:20]}"
 
 
@@ -68,23 +71,20 @@ class MaterialFile(models.Model):
         ordering = ['uploaded_at']
 
     @property
-    def filename(self):
+    def filename(self) -> str:
         return os.path.basename(self.file.name)
 
     @property
-    def display_name(self):
+    def display_name(self) -> str:
         basename = os.path.basename(self.file.name)
-        # Check if it has a prefix like YYYY-MM-DD_ (11 characters)
         if len(basename) > 11 and basename[4] == '-' and basename[7] == '-' and basename[10] == '_':
             return basename[11:]
         return basename
 
     @property
-    def is_image(self):
+    def is_image(self) -> bool:
         ext = os.path.splitext(self.file.name)[1].lower()
         return ext in ['.png', '.jpg', '.jpeg', '.gif', '.webp']
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"File for {self.material} - {self.display_name}"
-
-

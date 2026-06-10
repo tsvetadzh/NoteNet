@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.http import Http404, JsonResponse
+from django.http import Http404, HttpRequest, HttpResponse, JsonResponse
 from django.utils import timezone
 import datetime
 import re
@@ -196,7 +196,7 @@ SUBJECTS = {
 
 _SUBJECT_NAMES = {s['slug']: s['name'] for subjects in SUBJECTS.values() for s in subjects}
 
-def check_profile(request):
+def check_profile(request: HttpRequest) -> UserProfile | None:
     if not request.user.is_authenticated:
         return None
     profile, _ = UserProfile.objects.get_or_create(user=request.user)
@@ -204,7 +204,7 @@ def check_profile(request):
         messages.success(request, f"Congratulations! You have automatically advanced to Grade {profile.get_grade_display()}!")
     return profile
 
-def parse_grade(grade_str):
+def parse_grade(grade_str: str) -> tuple[int, str] | None:
     grade_str = grade_str.strip().lower()
     match = re.match(r'^(\d+)([a-d])$', grade_str)
     if match:
@@ -214,7 +214,7 @@ def parse_grade(grade_str):
             return num, letter
     return None
 
-def homepage(request):
+def homepage(request: HttpRequest) -> HttpResponse:
     profile = None
     if request.user.is_authenticated:
         profile = check_profile(request)
@@ -223,16 +223,16 @@ def homepage(request):
     return render(request, 'homepage.html', {'profile': profile})
 
 
-def setup_profile(request):
+def setup_profile(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
         return redirect('login')
-    
+
     profile, _ = UserProfile.objects.get_or_create(user=request.user)
-    
+
     if request.method == 'POST':
         full_name = request.POST.get('full_name', '').strip()
         grade_str = request.POST.get('grade', '').strip()
-        
+
         parsed = parse_grade(grade_str)
         if not full_name:
             messages.error(request, "Name is required.")
@@ -247,45 +247,42 @@ def setup_profile(request):
             profile.save()
             messages.success(request, f"Profile updated! Welcome to NoteNet, Grade {profile.get_grade_display()}.")
             return redirect('profile')
-            
+
     return render(request, 'setup_profile.html', {'profile': profile})
 
-def simulate_grade_advancement(request):
+def simulate_grade_advancement(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
         return redirect('login')
     profile = check_profile(request)
     if not profile.full_name or not profile.grade_number:
         return redirect('setup_profile')
-        
-    # Shift grade_updated_at exactly 365 days into the past
+
     profile.grade_updated_at = profile.grade_updated_at - datetime.timedelta(days=365)
     profile.save()
-    
-    # Check if the rollover triggers
+
     if profile.check_and_update_grade():
         messages.success(request, f"[SIMULATION] 365 Days passed! Automatically advanced to Grade {profile.get_grade_display()}!")
     else:
         messages.warning(request, "[SIMULATION] Date shifted back 365 days, but rollover did not trigger (already capped at 12?).")
-        
+
     return redirect('profile')
 
-def upload_material(request, grade, subject):
+def upload_material(request: HttpRequest, grade: int, subject: str) -> JsonResponse:
     if not request.user.is_authenticated:
         return JsonResponse({'success': False, 'error': 'Unauthorized'}, status=401)
-    
+
     profile = check_profile(request)
     if not profile.full_name or not profile.grade_number or profile.grade_number != grade:
         return JsonResponse({'success': False, 'error': 'Access Denied'}, status=403)
-        
+
     if request.method == 'POST':
         files = request.FILES.getlist('files')
         description = request.POST.get('description', '').strip()
         section = request.POST.get('section', profile.grade_letter).strip().lower()
-        
+
         if not files:
             return JsonResponse({'success': False, 'error': 'No files uploaded.'}, status=400)
-            
-        # Create Material
+
         material = Material.objects.create(
             grade=grade,
             section=section,
@@ -293,20 +290,19 @@ def upload_material(request, grade, subject):
             description=description,
             uploaded_by=request.user
         )
-        
-        # Save each file associated with this material
+
         for f in files:
             MaterialFile.objects.create(material=material, file=f)
-        
+
         return JsonResponse({
             'success': True,
             'message': 'Material uploaded successfully!'
         })
-        
+
     return JsonResponse({'success': False, 'error': 'Invalid request method.'}, status=400)
 
 
-def addnote(request):
+def addnote(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
         return redirect('login')
     profile = check_profile(request)
@@ -314,7 +310,7 @@ def addnote(request):
         return redirect('setup_profile')
     return render(request, 'addnote.html')
 
-def materials(request):
+def materials(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
         return redirect('login')
     profile = check_profile(request)
@@ -322,36 +318,34 @@ def materials(request):
         return redirect('setup_profile')
     return render(request, 'materials.html', {'profile': profile})
 
-def myclass(request):
+def myclass(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
         return redirect('login')
     profile = check_profile(request)
     if not profile.full_name or not profile.grade_number:
         return redirect('setup_profile')
-    
+
     group = 'networks' if profile.grade_letter == 'd' else 'system'
     info = _GRADE_INFO.get(profile.grade_number)
     prefix = info['prefix']
     url_name = f"{prefix}_{group}"
     return redirect(url_name)
 
-def profile(request):
+def profile(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
         return redirect('login')
-    
+
     profile = check_profile(request)
     if not profile.full_name or not profile.grade_number:
         return redirect('setup_profile')
-        
-    # Calculate days remaining for the next grade rollover
+
     next_advancement = profile.grade_updated_at + datetime.timedelta(days=365)
     delta = next_advancement - timezone.now()
     days_left = max(0, delta.days)
-    
-    # Progress percentage
+
     days_passed = 365 - days_left
     progress_percentage = min(100, max(0, int((days_passed / 365.0) * 100)))
-    
+
     return render(request, 'profile.html', {
         'user': request.user,
         'profile': profile,
@@ -360,7 +354,7 @@ def profile(request):
         'grade_updated_at': profile.grade_updated_at
     })
 
-def signup_view(request):
+def signup_view(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
         return redirect('profile')
     if request.method == 'POST':
@@ -383,7 +377,7 @@ def signup_view(request):
 
     return render(request, 'signup.html')
 
-def login_view(request):
+def login_view(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
         return redirect('profile')
     if request.method == 'POST':
@@ -401,7 +395,7 @@ def login_view(request):
 
     return render(request, 'login.html')
 
-def logout_view(request):
+def logout_view(request: HttpRequest) -> HttpResponse:
     logout(request)
     return redirect('homepage')
 
@@ -413,17 +407,17 @@ _GRADE_INFO = {
     12: {'ordinal': '12th', 'prefix': 'twelve'},
 }
 
-def class_grade(request, grade):
+def class_grade(request: HttpRequest, grade: int) -> HttpResponse:
     if not request.user.is_authenticated:
         return redirect('login')
     profile = check_profile(request)
     if not profile.full_name or not profile.grade_number:
         return redirect('setup_profile')
-        
+
     if profile.grade_number != grade:
         messages.warning(request, f"Access Denied: You are in grade {profile.get_grade_display()} and can only access Grade {profile.grade_number} resources.")
         return redirect('class_grade', grade=profile.grade_number)
-        
+
     info = _GRADE_INFO.get(grade)
     if not info:
         raise Http404
@@ -435,17 +429,17 @@ def class_grade(request, grade):
         'networks_url': f'{prefix}_networks',
     })
 
-def subject_list(request, grade, group):
+def subject_list(request: HttpRequest, grade: int, group: str) -> HttpResponse:
     if not request.user.is_authenticated:
         return redirect('login')
     profile = check_profile(request)
     if not profile.full_name or not profile.grade_number:
         return redirect('setup_profile')
-        
+
     if profile.grade_number != grade:
         messages.warning(request, f"Access Denied: You are in grade {profile.get_grade_display()} and can only access Grade {profile.grade_number} resources.")
         return redirect('class_grade', grade=profile.grade_number)
-        
+
     subjects = SUBJECTS.get((grade, group), [])
     return render(request, 'subjects/subject_list.html', {
         'subjects': subjects,
@@ -453,29 +447,29 @@ def subject_list(request, grade, group):
         'group': group,
     })
 
-def discipline(request, grade, subject):
+def discipline(request: HttpRequest, grade: int, subject: str) -> HttpResponse:
     if not request.user.is_authenticated:
         return redirect('login')
     profile = check_profile(request)
     if not profile.full_name or not profile.grade_number:
         return redirect('setup_profile')
-        
+
     if profile.grade_number != grade:
         messages.warning(request, f"Access Denied: You are in grade {profile.get_grade_display()} and can only access Grade {profile.grade_number} resources.")
         return redirect('class_grade', grade=profile.grade_number)
-        
+
     name = _SUBJECT_NAMES.get(subject, subject.replace('_', ' ').title())
-    
+
     selected_section = request.GET.get('section', profile.grade_letter).strip().lower()
     if selected_section not in ['a', 'b', 'c', 'd']:
         selected_section = profile.grade_letter
-        
+
     materials_list = Material.objects.filter(
         grade=grade,
         subject=subject,
         section=selected_section
     ).order_by('-uploaded_at')
-    
+
     return render(request, 'disciplines/discipline.html', {
         'grade': grade,
         'subject': subject,
@@ -485,5 +479,3 @@ def discipline(request, grade, subject):
         'sections': ['a', 'b', 'c', 'd'],
         'profile': profile
     })
-
-
