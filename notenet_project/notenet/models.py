@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Optional
 import datetime
 import os
+from django.conf import settings
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -83,6 +84,9 @@ class MaterialFile(models.Model):
 
     @property
     def is_image(self) -> bool:
+        # Allow disabling image rendering from backend via setting
+        if getattr(settings, 'DISABLE_IMAGE_VIEWER', False):
+            return False
         ext = os.path.splitext(self.file.name)[1].lower()
         return ext in ['.png', '.jpg', '.jpeg', '.gif', '.webp']
 
