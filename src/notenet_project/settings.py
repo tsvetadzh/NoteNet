@@ -76,24 +76,27 @@ WSGI_APPLICATION = 'notenet_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'not_important': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'NoteNet',
-        'USER': 'postgres',
-        'PASSWORD': 'KikI66~99Bg',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    },
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'NoteNet',
-        'USER': 'postgres',
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5432',
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+
+if DB_PASSWORD:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'NoteNet',
+            'USER': 'postgres',
+            'PASSWORD': DB_PASSWORD,
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-}
+else:
+    # Fallback to SQLite for local development when no DB password provided
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
