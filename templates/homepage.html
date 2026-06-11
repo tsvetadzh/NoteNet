@@ -63,9 +63,13 @@
                 {%endif%}
             </div>
 
+            <div>
+                <button class="party-button"><p>PRESS HERE!!!</p></button>
+            </div>
+
             <div class="sug-box">
                 {%if profile%}
-                    <img src="{%static 'assets/sugmyclass.png'%}" class="sugimg">
+                    <img src="{%static 'assets/sugaddnote.png'%}" class="sugimg">
                     <a href="{% url 'profile' %}" class="text">View your profile</a>
                 {%else%}
                     <img src="{%static 'assets/sugaddnote.png'%}" class="sugimg">  
