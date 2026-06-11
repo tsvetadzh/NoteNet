@@ -19,16 +19,28 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
+DEBUG = os.getenv('DJANGO_DEBUG', 'True').lower() in ('1', 'true', 'yes')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-uw#8rw@7q#p=^k^2tx7+z676-#uf86atf_gt@-ueg43m=+6#5)'
+# Configure ALLOWED_HOSTS: read from env `ALLOWED_HOSTS` (comma-separated).
+# If not provided and DEBUG is False, default to localhost addresses so
+# the app can run locally in a non-debug environment.
+_env_allowed = os.getenv('ALLOWED_HOSTS')
+if _env_allowed:
+    ALLOWED_HOSTS = [h.strip() for h in _env_allowed.split(',') if h.strip()]
+else:
+    ALLOWED_HOSTS = [] if DEBUG else ['localhost', '127.0.0.1']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECRET_KEY: read from environment. In development (DEBUG=True) generate
+# a random key if not provided so the app can run without requiring env setup.
+from django.core.management.utils import get_random_secret_key
+from django.core.exceptions import ImproperlyConfigured
 
-ALLOWED_HOSTS = []
+SECRET_KEY = os.getenv('SECRET_KEY')
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = get_random_secret_key()
+    else:
+        raise ImproperlyConfigured('The SECRET_KEY setting must not be empty.')
 
 
 # Application definition
